@@ -7,6 +7,7 @@ defmodule PopoWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug PopoWeb.Plugs.FetchCurrentUser
   end
 
   pipeline :api do
@@ -17,6 +18,10 @@ defmodule PopoWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    resources "/sessions", SessionController, 
+      only: [:new, :create, :delete], singleton: true
+    resources "/users", UserController,
+       only: [:new, :create, :show, :index]
   end
 
   # Other scopes may use custom stacks.

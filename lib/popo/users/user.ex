@@ -7,6 +7,8 @@ defmodule Popo.Users.User do
     field :location, :map
     field :name, :string
     field :password, :string
+    field :password_confirmation, :string, virtual: true
+    
 
     timestamps()
   end
@@ -14,7 +16,9 @@ defmodule Popo.Users.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :name, :password, :location])
-    |> validate_required([:email, :name, :password, :location])
+    |> cast(attrs, [:email, :name, :password, :location, :password_confirmation])
+    |> validate_confirmation(:password)
+    |> validate_length(:password, min: 12)
+    |> validate_required([:email, :name, :password])
   end
 end
