@@ -7,7 +7,7 @@ defmodule Popo.Profiles.Profile do
     field :gender, :string
     field :intro, :string
     field :photo, :string
-    field :user_id, :id
+    belongs_to :user, Popo.Users.User
 
     timestamps()
   end
@@ -15,7 +15,6 @@ defmodule Popo.Profiles.Profile do
   @doc false
   def changeset(profile, attrs) do
     profile
-    |> cast(attrs, [:dob, :gender, :intro, :photo])
-    |> validate_required([:dob, :gender, :intro, :photo])
+    |> cast(attrs, [:dob, :gender, :intro, :photo, :user_id])
   end
 end

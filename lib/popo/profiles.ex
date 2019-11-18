@@ -36,7 +36,12 @@ defmodule Popo.Profiles do
 
   """
   def get_profile!(id), do: Repo.get!(Profile, id)
+  def get_profile_by_user(id) do
+     Repo.one! from s in Profile, 
+	where: s.user_id == ^id, 
 
+   preload: [:user]
+  end
   @doc """
   Creates a profile.
 

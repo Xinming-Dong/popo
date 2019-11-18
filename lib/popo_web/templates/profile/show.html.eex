@@ -1,7 +1,15 @@
 <h1>Show Profile</h1>
 
 <ul>
+  <li>
+    <strong>Email:</strong>
+    <%= @profile.user.email %>
+  </li>
 
+  <li>
+    <strong>Name:</strong>
+    <%= @profile.user.name %>
+  </li>
   <li>
     <strong>Dob:</strong>
     <%= @profile.dob %>
@@ -25,4 +33,4 @@
 </ul>
 
 <span><%= link "Edit", to: Routes.profile_path(@conn, :edit, @profile) %></span>
-<span><%= link "Back", to: Routes.profile_path(@conn, :index) %></span>
+<span><%= link "Back", to: Routes.page_path(@conn, :index) %></span>

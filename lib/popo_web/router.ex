@@ -22,6 +22,7 @@ defmodule PopoWeb.Router do
       only: [:new, :create, :delete], singleton: true
     resources "/users", UserController,
        only: [:new, :create, :show, :index]
+    resources "/profiles", ProfileController
   end
 
   # Other scopes may use custom stacks.

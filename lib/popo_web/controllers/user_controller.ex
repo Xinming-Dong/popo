@@ -17,9 +17,10 @@ defmodule PopoWeb.UserController do
   def create(conn, %{"user" => user_params}) do
     case Users.create_user(user_params) do
       {:ok, user} ->
+        IO.inspect(user.id)
         conn
-        |> put_flash(:info, "User created successfully.")
-        |> redirect(to: Routes.user_path(conn, :show, user))
+        |> put_flash(:info, "Please edit your profile.")
+        |> redirect(to: Routes.profile_path(conn, :new, user_id: user.id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

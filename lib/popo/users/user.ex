@@ -8,6 +8,7 @@ defmodule Popo.Users.User do
     field :name, :string
     field :password, :string
     field :password_confirmation, :string, virtual: true
+    has_one :profile, Popo.Profiles.Profile
     
 
     timestamps()
