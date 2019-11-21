@@ -23,6 +23,9 @@ defmodule PopoWeb.Router do
     resources "/users", UserController,
        only: [:new, :create, :show, :index]
     resources "/profiles", ProfileController
+    resources "/messages", MessageController
+
+    get "/message/chat", MessageController, :chat
   end
 
   # Other scopes may use custom stacks.
