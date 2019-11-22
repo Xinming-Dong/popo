@@ -5,7 +5,9 @@ defmodule PopoWeb.UserController do
   alias Popo.Users.User
 
   def index(conn, _params) do
-    users = Users.list_users()
+    user=Users.get_user!(_params["user_id"])
+    users = Users.get_nearby(user)
+    IO.inspect(users)
     render(conn, "index.html", users: users)
   end
 
@@ -32,6 +34,7 @@ defmodule PopoWeb.UserController do
     render(conn, "show.html", user: user)
   end
 
+
   def edit(conn, %{"id" => id}) do
     user = Users.get_user!(id)
     changeset = Users.change_user(user)
@@ -45,7 +48,7 @@ defmodule PopoWeb.UserController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User updated successfully.")
-        |> redirect(to: Routes.user_path(conn, :show, user))
+        |> redirect(to: Routes.user_path(conn, :index, user_id: user.id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", user: user, changeset: changeset)

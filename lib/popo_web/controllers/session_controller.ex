@@ -20,6 +20,8 @@ defmodule PopoWeb.SessionController do
   end
 
   def delete(conn, _params) do
+    user = Popo.Users.get_user(get_session(conn, :user_id))
+    Popo.Users.update_user(user, %{latitude: nil, longitude: nil}) 
     conn
     |> delete_session(:user_id)
     |> put_flash(:info, "Logged out.")

@@ -21,7 +21,7 @@ defmodule PopoWeb.Router do
     resources "/sessions", SessionController, 
       only: [:new, :create, :delete], singleton: true
     resources "/users", UserController,
-       only: [:new, :create, :show, :index]
+       only: [:new, :create, :show, :index, :edit, :update]
     resources "/profiles", ProfileController
   end
 

@@ -1,12 +1,9 @@
 <h1>Listing Users</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Email</th>
       <th>Name</th>
-      <th>Password</th>
-      <th>Location</th>
 
       <th></th>
     </tr>
@@ -14,15 +11,16 @@
   <tbody>
 <%= for user <- @users do %>
     <tr>
-      <td><%= user.email %></td>
       <td><%= user.name %></td>
-      <td><%= user.password %></td>
-      <td><%= user.location %></td>
 
       <td>
-        <span><%= link "Show", to: Routes.user_path(@conn, :show, user) %></span>
-        <span><%= link "Edit", to: Routes.user_path(@conn, :edit, user) %></span>
-        <span><%= link "Delete", to: Routes.user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <span><a class="nav-link" href="#">chat</a></span>
+       </td>
+       <td>
+        <span><a class="nav-link" href="#">+add</a></span>
+       </td>
+       <td>
+	<span><a class="nav-link" href="#">show posts</a></span>
       </td>
     </tr>
 <% end %>

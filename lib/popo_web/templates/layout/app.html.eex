@@ -17,10 +17,12 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link" href="#">All Photos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Your Photos</a>
-            </li>
+	    </li>
+	    <li>
+	    <%= if @current_user do %>
+	    <%= link("Nearby", to: Routes.user_path(@conn, :edit, @current_user)) %>
+	    <% end %>
+	    </li>
           </ul>
         </div>
 	<div class="col-4 text-light">

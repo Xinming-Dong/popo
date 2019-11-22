@@ -1,0 +1,18 @@
+
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+<div class="form-group">
+    <%= label f, :latitude %>
+    <%= text_input f, :latitude, class: "form-control" , id: "latitude"%>
+    <%= error_tag f, :latitude %>
+  </div>
+  <div class="form-group">
+    <%= label f, :longitude %>
+    <%= text_input f, :longitude, class: "form-control", id: "longitude" %>
+    <%= error_tag f, :longitude %>
+  </div>
+<% end %>

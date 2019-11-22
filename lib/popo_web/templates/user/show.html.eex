@@ -1,7 +1,5 @@
 <h1>Show User</h1>
-
 <ul>
-
   <li>
     <strong>Email:</strong>
     <%= @user.email %>
@@ -18,11 +16,19 @@
   </li>
 
   <li>
-    <strong>Location:</strong>
-    <%= @user.location %>
+    <strong>Longitude:</strong>
+    <%= @user.longitude %>
   </li>
+<li>
+<strong>Latitude:</strong>
+<%= @user.latitude %>
+</li>
+<div id="result">
+        <!--Position information will be inserted here-->
+    </div>
 
 </ul>
 
 <span><%= link "Back", to: Routes.user_path(@conn, :index) %></span>
 <span><%= link "Edit", to: Routes.profile_path(@conn, :edit, @user.id) %></span>
+

@@ -4,7 +4,8 @@ defmodule Popo.Users.User do
 
   schema "users" do
     field :email, :string
-    field :location, :map
+    field :latitude, :float
+    field :longitude, :float
     field :name, :string
     field :password, :string
     field :password_confirmation, :string, virtual: true
@@ -17,7 +18,7 @@ defmodule Popo.Users.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :name, :password, :location, :password_confirmation])
+    |> cast(attrs, [:email, :name, :password, :longitude, :latitude, :password_confirmation])
     |> validate_confirmation(:password)
     |> validate_length(:password, min: 12)
     |> validate_required([:email, :name, :password])
