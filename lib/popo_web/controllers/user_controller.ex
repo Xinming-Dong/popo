@@ -31,7 +31,8 @@ defmodule PopoWeb.UserController do
 
   def show(conn, %{"id" => id}) do
     user = Users.get_user!(id)
-    render(conn, "show.html", user: user)
+    users = Users.get_nearby(user)
+    render(conn, "show.html", users: users)
   end
 
 
@@ -48,7 +49,7 @@ defmodule PopoWeb.UserController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User updated successfully.")
-        |> redirect(to: Routes.user_path(conn, :index, user_id: user.id))
+        |> redirect(to: Routes.user_path(conn, :show, user))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", user: user, changeset: changeset)

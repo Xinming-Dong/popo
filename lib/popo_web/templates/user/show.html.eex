@@ -1,34 +1,30 @@
-<h1>Show User</h1>
-<ul>
-  <li>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </li>
+<h1>Show Users</h1>
 
-  <li>
-    <strong>Name:</strong>
-    <%= @user.name %>
-  </li>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
 
-  <li>
-    <strong>Password:</strong>
-    <%= @user.password %>
-  </li>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for user <- @users do %>
+    <tr>
+      <td><%= user.name %></td>
 
-  <li>
-    <strong>Longitude:</strong>
-    <%= @user.longitude %>
-  </li>
-<li>
-<strong>Latitude:</strong>
-<%= @user.latitude %>
-</li>
-<div id="result">
-        <!--Position information will be inserted here-->
-    </div>
+      <td>
+        <span><a class="nav-link" href="#">chat</a></span>
+       </td>
+       <td>
+        <span><a class="nav-link" href="#">+add</a></span>
+       </td>
+       <td>
+	<span><a class="nav-link" href="#">show posts</a></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
 
-</ul>
-
-<span><%= link "Back", to: Routes.user_path(@conn, :index) %></span>
-<span><%= link "Edit", to: Routes.profile_path(@conn, :edit, @user.id) %></span>
-
+<span><%= link "New User", to: Routes.user_path(@conn, :new) %></span>
