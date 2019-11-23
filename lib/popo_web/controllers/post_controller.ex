@@ -17,10 +17,10 @@ defmodule PopoWeb.PostController do
   def create(conn, %{"post" => post_params}) do
     post_params = Map.put(post_params, "user_id", conn.assigns[:current_user].id)
     case Posts.create_post(post_params) do
-      {:ok, post} ->
+      {:ok, _post} ->
         conn
         |> put_flash(:info, "Post created successfully.")
-        |> redirect(to: Routes.post_path(conn, :show, post))
+        |> redirect(to: Routes.user_path(conn, :show, conn.assigns[:current_user]))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

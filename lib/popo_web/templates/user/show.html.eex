@@ -17,10 +17,7 @@
     <%= @user.password %>
   </li>
 
-  <li>
-    <strong>Location:</strong>
-    <%= @user.location %>
-  </li>
+
 
 </ul>
 

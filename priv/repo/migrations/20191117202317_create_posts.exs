@@ -4,9 +4,11 @@ defmodule Popo.Repo.Migrations.CreatePosts do
   def change do
     create table(:posts) do
       add :description, :string
-      add :photo, :string
-      add :location, :map
       add :user_id, references(:users, on_delete: :nothing)
+      add :uuid, :string
+      add :filename, :string
+      add :location, :map
+
 
       timestamps()
     end

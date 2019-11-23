@@ -9,3 +9,8 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias Popo.Users.User
+alias Popo.Repo
+
+Repo.insert!(%User{email: "aa@aa", name: "aa", password: "123456789012"})

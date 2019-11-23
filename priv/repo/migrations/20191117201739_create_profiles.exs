@@ -6,8 +6,9 @@ defmodule Popo.Repo.Migrations.CreateProfiles do
       add :dob, :date
       add :gender, :string
       add :intro, :text
-      add :photo, :string
       add :user_id, references(:users, on_delete: :nothing)
+      add :uuid, :string
+      add :filename, :string
 
       timestamps()
     end
