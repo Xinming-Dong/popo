@@ -3,6 +3,8 @@ defmodule PopoWeb.UserSocket do
 
   ## Channels
   # channel "room:*", PopoWeb.RoomChannel
+  # TODO: all user in the same channel / seperate channels
+  channel "popo:*", PopoWeb.PopoChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After

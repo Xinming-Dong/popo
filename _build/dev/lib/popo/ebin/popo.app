@@ -19,6 +19,7 @@
                         'Elixir.PopoWeb.PageController',
                         'Elixir.PopoWeb.PageView',
                         'Elixir.PopoWeb.Plugs.FetchCurrentUser',
+                        'Elixir.PopoWeb.PopoChannel',
                         'Elixir.PopoWeb.PostController',
                         'Elixir.PopoWeb.PostView',
                         'Elixir.PopoWeb.ProfileController',

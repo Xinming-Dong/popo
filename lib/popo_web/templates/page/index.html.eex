@@ -1,6 +1,20 @@
 <div class="row">
   <div class="col-12">
     <h1>Welcome to Popo App</h1>
-    <%= link("Send Message", to: Routes.message_path(@conn, :chat)) %>
+    <%# <%= link("Send Message", to: Routes.message_path(@conn, :chat)) %>
+    <%# friend list %>
+    <div class="row vh-100">
+      <div id="list-example" class="col-md-3 list-group">
+        <a class="list-group-item list-group-item-action" href="<%= Routes.message_path(@conn, :chat)%>">Chat</a>
+      </div>
+      <div class="col-xs-12">
+        <ul id='msg-list' style='list-style: none; min-height:200px; padding: 10px;'></ul>
+
+        <input type="text" id="name" class="form-control" placeholder="Your Name" autofocus>
+
+        <input type="text" id="msg" class="form-control" placeholder="Your Message">
+
+      </div>
+    </div>
   </div>
 </div>
