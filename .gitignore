@@ -20,7 +20,7 @@ erl_crash.dump
 *.ez
 
 # Ignore package tarball (built via "mix hex.build").
-time1-*.tar
+popo-*.tar
 
 # If NPM crashes, it generates a log, let's ignore it too.
 npm-debug.log
@@ -33,5 +33,4 @@ npm-debug.log
 # this depending on your deployment strategy.
 # /priv/static/
 # prod-env.sh
-
-/.elixir_ls/
+#
