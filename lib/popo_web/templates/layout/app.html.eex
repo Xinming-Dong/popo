@@ -18,7 +18,7 @@
           <ul class="navbar-nav mr-auto">
             <%= if @current_user do %>
               <%= link( "Your Posts", to: Routes.user_path(@conn, :show, @current_user)) %>
-              <%= link( "Your Profile", to: Routes.profile_path(@conn, :show, @current_user)) %>
+              <%= link( "Nearby Posts", to: Routes.post_path(@conn, :show, @current_user, type: "nearby")) %>
             <% end %>
           </ul>
         </div>
