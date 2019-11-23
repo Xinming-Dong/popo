@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Popo · Phoenix Framework</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    
   </head>
   <body>
     <div class="container">
@@ -15,25 +16,21 @@
         </div>
         <div class="col-4">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">All Photos</a>
-	    </li>
-	    <li>
-	    <%= if @current_user do %>
-	    <%= link("Nearby", to: Routes.user_path(@conn, :edit, @current_user)) %>
-	    <% end %>
-	    </li>
+            <%= if @current_user do %>
+              <%= link( "Your Posts", to: Routes.user_path(@conn, :show, @current_user)) %>
+              <%= link( "Your Profile", to: Routes.profile_path(@conn, :show, @current_user)) %>
+            <% end %>
           </ul>
         </div>
-	<div class="col-4 text-light">
+	      <div class="col-4 text-light">
           <%= if @current_user do %>
-	   User: <%= link(@current_user.name,
+	          User: <%= link(@current_user.name,
               to: Routes.profile_path(@conn, :show, @current_user)) %>
             (<%= link("Logout", to: Routes.session_path(@conn, :delete),
               method: :delete) %>)
           <% else %>
             <%= link("Login", to: Routes.session_path(@conn, :new)) %>|
-	    <%= link("Register", to: Routes.user_path(@conn, :new)) %>
+	          <%= link("Register", to: Routes.user_path(@conn, :new)) %>
           <% end %>
         </div>
       </nav>

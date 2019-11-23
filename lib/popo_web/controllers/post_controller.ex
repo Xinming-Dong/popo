@@ -15,6 +15,7 @@ defmodule PopoWeb.PostController do
   end
 
   def create(conn, %{"post" => post_params}) do
+    post_params = Map.put(post_params, "user_id", conn.assigns[:current_user].id)
     case Posts.create_post(post_params) do
       {:ok, post} ->
         conn
@@ -58,5 +59,15 @@ defmodule PopoWeb.PostController do
     conn
     |> put_flash(:info, "Post deleted successfully.")
     |> redirect(to: Routes.post_path(conn, :index))
+  end
+
+  def file(conn, %{"id" => id}) do
+    post = Posts.get_post!(id)
+    dir  = Post.photo_upload_dir(post.uuid)
+    data = File.read!(Path.join(dir, post.filename))
+    conn
+    |> put_resp_header("content-type", "image/jpeg")
+    |> put_resp_header("content-disposition", "inline")
+    |> send_resp(200, data)
   end
 end

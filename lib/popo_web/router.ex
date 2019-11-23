@@ -18,11 +18,15 @@ defmodule PopoWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    resources "/sessions", SessionController, 
+    resources "/sessions", SessionController,
       only: [:new, :create, :delete], singleton: true
     resources "/users", UserController,
        only: [:new, :create, :show, :index, :edit, :update]
     resources "/profiles", ProfileController
+    resources "/posts", PostController
+    resources "/messages", MessageController
+    get "/posts/:id/file", PostController, :file
+    get "/profiles/:id/file", ProfileController, :file
   end
 
   # Other scopes may use custom stacks.

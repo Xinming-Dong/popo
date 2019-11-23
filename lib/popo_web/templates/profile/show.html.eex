@@ -10,6 +10,7 @@
     <strong>Name:</strong>
     <%= @profile.user.name %>
   </li>
+
   <li>
     <strong>Dob:</strong>
     <%= @profile.dob %>
@@ -24,13 +25,20 @@
     <strong>Intro:</strong>
     <%= @profile.intro %>
   </li>
-
+  
   <li>
-    <strong>Photo:</strong>
-    <%= @profile.photo %>
+  <strong>Profile Picture:</strong>
+  <div class="card">
+      <%= if @profile.uuid do %>
+        <%= img_tag(Routes.profile_path(@conn, :file, @profile), 
+        class: "card-img-top") %>
+      <% end %>
+  </div>
   </li>
+  </ul>
+  
 
-</ul>
+
 
 <span><%= link "Edit", to: Routes.profile_path(@conn, :edit, @profile) %></span>
 <span><%= link "Back", to: Routes.page_path(@conn, :index) %></span>

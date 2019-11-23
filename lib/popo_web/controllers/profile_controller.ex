@@ -9,8 +9,8 @@ defmodule PopoWeb.ProfileController do
     render(conn, "index.html", profiles: profiles)
   end
 
-  def new(conn, _params) do
-    user_id = String.to_integer(_params["user_id"])
+  def new(conn, params) do
+    user_id = String.to_integer(params["user_id"])
     changeset = Profiles.change_profile(%Profile{})
     render(conn, "new.html", changeset: changeset, user_id: user_id)
   end
@@ -19,7 +19,7 @@ defmodule PopoWeb.ProfileController do
     profile_params = Map.put(profile_params, "user_id", user_id)
     IO.inspect(profile_params)
     case Profiles.create_profile(profile_params) do
-      {:ok, profile} ->
+      {:ok, _profile} ->
         conn
         |> put_flash(:info, "Profile created successfully.")
         |> redirect(to: Routes.page_path(conn, :index))
@@ -44,7 +44,7 @@ defmodule PopoWeb.ProfileController do
     profile = Profiles.get_profile!(id)
 
     case Profiles.update_profile(profile, profile_params) do
-      {:ok, profile} ->
+      {:ok, _profile} ->
         conn
         |> put_flash(:info, "Profile updated successfully.")
         |> redirect(to: Routes.profile_path(conn, :show, conn.assigns[:current_user].id))
@@ -61,5 +61,15 @@ defmodule PopoWeb.ProfileController do
     conn
     |> put_flash(:info, "Profile deleted successfully.")
     |> redirect(to: Routes.profile_path(conn, :index))
+  end
+
+  def file(conn, %{"id" => id}) do
+    profile = Profiles.get_profile!(id)
+    dir = Profile.photo_upload_dir(profile.uuid)
+    data = File.read!(Path.join(dir, profile.filename))
+    conn
+    |> put_resp_header("content-type", "image/jpeg")
+    |> put_resp_header("content-disposition", "inline")
+    |> send_resp(200, data)
   end
 end
