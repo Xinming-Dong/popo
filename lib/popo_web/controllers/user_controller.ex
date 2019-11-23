@@ -31,8 +31,8 @@ defmodule PopoWeb.UserController do
 
   def show(conn, %{"id" => id}) do
     user = Users.get_user_with_posts!(id)
-    # users = Users.get_nearby(user)
-    render(conn, "show.html", user: user)
+    users = Users.get_nearby(user)
+    render(conn, "show.html", user: user, users: users)
   end
 
 
