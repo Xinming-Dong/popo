@@ -16,8 +16,18 @@
   <%= file_input f, :photo, class: "form-control btn btn-file" %>
   <%= error_tag f, :photo %>
 </div>
-
-
+<div class="form-group">
+    <%= label f, :latitude %>
+    <%= text_input f, :latitude, class: "form-control" , id: "latitude"%>
+    <%= error_tag f, :latitude %>
+  </div>
+  <div class="form-group">
+    <%= label f, :longitude %>
+    <%= text_input f, :longitude, class: "form-control", id: "longitude" %>
+    <%= error_tag f, :longitude %>
+  </div>
+<div id="result"></div>
+<button type="button" onClick="showPosition()">Get Location</button>
   <div>
     <%= submit "Save" %>
   </div>
