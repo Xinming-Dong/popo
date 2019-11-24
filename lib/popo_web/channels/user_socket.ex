@@ -3,6 +3,7 @@ defmodule PopoWeb.UserSocket do
 
   ## Channels
   # channel "room:*", PopoWeb.RoomChannel
+  channel "popo:*", PopoWeb.PopoChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
@@ -31,3 +32,4 @@ defmodule PopoWeb.UserSocket do
   # Returning `nil` makes this socket anonymous.
   def id(_socket), do: nil
 end
+
