@@ -1,5 +1,6 @@
 <h4>Your Location</h4>
 <div id="result"></div>
+<div id="mapholder"></div>
 
 <%= render "form1.html", Map.put(assigns, :action, Routes.user_path(@conn, :update, @user)) %>
 

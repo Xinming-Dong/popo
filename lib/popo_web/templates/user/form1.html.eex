@@ -15,4 +15,7 @@
     <%= text_input f, :longitude, class: "form-control", id: "longitude" %>
     <%= error_tag f, :longitude %>
   </div>
+<div>
+<%=submit "OK", class: "btn btn-primary" %>
+</div>
 <% end %>
