@@ -6,7 +6,8 @@ defmodule Popo.Repo.Migrations.CreateUsers do
       add :email, :string
       add :name, :string
       add :password, :string
-      add :location, :map
+      add :latitude, :float, default: nil, null: true
+      add :longitude, :float, default: nil, null: true
 
       timestamps()
     end

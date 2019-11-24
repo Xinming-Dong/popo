@@ -7,7 +7,8 @@ defmodule Popo.Repo.Migrations.CreatePosts do
       add :user_id, references(:users, on_delete: :nothing)
       add :uuid, :string
       add :filename, :string
-      add :location, :map
+      add :latitude, :float, defaut: nil, null: true
+      add :longitude, :float, defaut: nil, null: true
 
 
       timestamps()

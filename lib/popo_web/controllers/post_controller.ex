@@ -6,8 +6,8 @@ defmodule PopoWeb.PostController do
   alias Popo.Users
 
   def index(conn, _params) do
-    posts = Posts.list_posts()
-    render(conn, "index.html", posts: posts)
+    user = Users.get_user_with_posts!(conn.assigns[:current_user].id)
+    render(conn, "index.html", user: user)
   end
 
   def new(conn, _params) do
@@ -21,7 +21,7 @@ defmodule PopoWeb.PostController do
       {:ok, _post} ->
         conn
         |> put_flash(:info, "Post created successfully.")
-        |> redirect(to: Routes.user_path(conn, :show, conn.assigns[:current_user]))
+        |> redirect(to: Routes.post_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -32,7 +32,7 @@ defmodule PopoWeb.PostController do
     if (display != "nearby") do
       post = Posts.get_post!(id)
       render(conn, "show.html", post: post)
-    else 
+    else
       user = Users.get_user!(id)
       posts = Posts.get_nearby(user)
       render(conn, "show_nearby.html", posts: posts)

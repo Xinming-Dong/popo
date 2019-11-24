@@ -25,7 +25,6 @@ defmodule Popo.Users do
     query = from u in User,
           where: (u.longitude - ^user.longitude)*(u.longitude - ^user.longitude) + (u.latitude - ^user.latitude) * (u.latitude - ^user.latitude) < 0.000072 and u.id != ^user.id
     Repo.all(query)
-
   end
 
  def get_user_by_email(email) do
