@@ -41,6 +41,15 @@ defmodule Popo.Posts do
       preload: [:user]
   end
 
+  def get_nearby(user) do
+    query = from u in Post,
+          where: (u.longitude - ^user.longitude)*(u.longitude - ^user.longitude) +
+ (u.latitude - ^user.latitude) * (u.latitude - ^user.latitude) < 0.000072 and u.user_id != ^user.id, 
+    preload: [:user]
+    Repo.all(query)
+
+  end
+
   @doc """
   Creates a post.
 

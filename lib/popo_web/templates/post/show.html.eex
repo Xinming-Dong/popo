@@ -13,8 +13,8 @@
   </li>
 
   <li>
-    <strong>Location:</strong>
-    <%= @post.location %>
+    <strong>Author:</strong>
+    <%= @post.user.name %>
   </li>
 
 </ul>

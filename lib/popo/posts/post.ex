@@ -4,9 +4,10 @@ defmodule Popo.Posts.Post do
 
   schema "posts" do
     field :description, :string, default: ""
-    field :location, :map
     field :uuid, :string
     field :filename, :string
+    field :latitude, :float
+    field :longitude, :float
 
     belongs_to :user, Popo.Users.User
 
@@ -18,7 +19,7 @@ defmodule Popo.Posts.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:description, :photo, :location, :user_id])
+    |> cast(attrs, [:description, :photo, :latitude, :longitude, :user_id])
     |> validate_required([:user_id])
     |> generate_uuid()
     |> save_photo_upload()

@@ -3,6 +3,7 @@ defmodule PopoWeb.PostController do
 
   alias Popo.Posts
   alias Popo.Posts.Post
+  alias Popo.Users
 
   def index(conn, _params) do
     posts = Posts.list_posts()
@@ -27,9 +28,15 @@ defmodule PopoWeb.PostController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    post = Posts.get_post!(id)
-    render(conn, "show.html", post: post)
+  def show(conn, %{"id" => id, "type" => display}) do
+    if (display != "nearby") do
+      post = Posts.get_post!(id)
+      render(conn, "show.html", post: post)
+    else 
+      user = Users.get_user!(id)
+      posts = Posts.get_nearby(user)
+      render(conn, "show_nearby.html", posts: posts)
+    end
   end
 
   def edit(conn, %{"id" => id}) do

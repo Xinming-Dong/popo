@@ -3,3 +3,4 @@
 <%= render "form.html", Map.put(assigns, :action, Routes.post_path(@conn, :create)) %>
 
 <span><%= link "Back", to: Routes.post_path(@conn, :index) %></span>
+<script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/api_post.js") %>"></script>
