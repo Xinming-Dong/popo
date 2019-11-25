@@ -4,9 +4,9 @@
     <%# <%= link("Send Message", to: Routes.message_path(@conn, :chat)) %>
     <%# friend list %>
     <div class="row vh-100">
-      <div id="list-example" class="col-md-3 list-group">
-        <a class="list-group-item list-group-item-action" href="<%= Routes.message_path(@conn, :chat)%>">Chat</a>
-      </div>
+      <%# <div id="list-example" class="col-md-3 list-group"> %>
+        <%# <a class="list-group-item list-group-item-action" href="<%= Routes.message_path(@conn, :chat)%>
+      <%# </div> %>
       <div class="col-xs-12">
         <ul id='msg-list' style='list-style: none; min-height:200px; padding: 10px;'></ul>
 
