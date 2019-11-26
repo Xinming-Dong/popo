@@ -4,6 +4,10 @@ defmodule PopoWeb.MessageController do
   alias Popo.Messages
   alias Popo.Messages.Message
 
+  def chat(conn, %{"id" => id, "name" => name}) do
+    render(conn, "chat.html", id: id, name: name)
+  end
+
   def index(conn, _params) do
     messages = Messages.list_messages()
     render(conn, "index.html", messages: messages)

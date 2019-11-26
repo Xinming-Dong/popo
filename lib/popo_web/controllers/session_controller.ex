@@ -7,11 +7,17 @@ defmodule PopoWeb.SessionController do
 
   def create(conn, %{"email" => email}) do
     user = Popo.Users.get_user_by_email(email)
+    IO.puts "inspect user"
+    IO.inspect user
+    id = user.id
+    IO.inspect id
+    name = user.name
+    IO.inspect name
     if user do
       conn
       |> put_session(:user_id, user.id)
       |> put_flash(:info, "Welcome back #{user.email}")
-      |> redirect(to: Routes.page_path(conn, :index))
+      |> redirect(to: Routes.message_path(conn, :chat, id: id, name: name))
     else
       conn
       |> put_flash(:error, "Login failed.")
