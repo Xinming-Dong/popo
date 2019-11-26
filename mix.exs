@@ -19,7 +19,7 @@ defmodule Popo.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      env: [api_key: "AIzaSyC1-n68_qn5EBwg4JI1FaGYz8TWJwgwczw"],
+
       mod: {Popo.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
