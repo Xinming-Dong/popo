@@ -3,6 +3,7 @@ defmodule PopoWeb.UserController do
 
   alias Popo.Users
   alias Popo.Users.User
+  alias Popo.MapApi
 
   def index(conn, params) do
     user=Users.get_user!(params["user_id"])
@@ -30,11 +31,11 @@ defmodule PopoWeb.UserController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"id" => id}) do 
     user = Users.get_user!(id)
-    IO.inspect user
     users = Users.get_nearby(user)
-    render(conn, "show.html", users: users, user: user)
+    image = MapApi.getLocation(user, users)
+    render(conn, "show.html", users: users, user: user,image: image)
   end
 
 

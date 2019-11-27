@@ -1,4 +1,5 @@
 <h1>Show Users</h1>
+<%= img_tag("data:image/png;base64,"<> @image) %>
 <%= if @users do %>
 <table class="table table-striped">
   <thead>
@@ -9,7 +10,6 @@
     </tr>
   </thead>
    <tbody>
-  
     <%= for user <- @users do %>
     <tr>
       <td><%= link( user.name, to: Routes.profile_path(@conn, :show, user)) %></td>
