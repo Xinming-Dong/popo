@@ -6,16 +6,15 @@
     </div>
   <% end %>
 <div class="form-group">
-    <%= label f, :latitude %>
-    <%= text_input f, :latitude, class: "form-control" , id: "latitude"%>
+    
+    <%= hidden_input f, :latitude, class: "form-control" , id: "latitude"%>
     <%= error_tag f, :latitude %>
   </div>
   <div class="form-group">
-    <%= label f, :longitude %>
-    <%= text_input f, :longitude, class: "form-control", id: "longitude" %>
+   
+    <%= hidden_input f, :longitude, class: "form-control", id: "longitude" %>
     <%= error_tag f, :longitude %>
   </div>
 <div>
-<%=submit "OK", class: "btn btn-primary" %>
 </div>
 <% end %>

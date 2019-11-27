@@ -1,17 +1,23 @@
 defmodule Popo.GeocodeApi do
 
   def getLocation(params) do
-    query = []
-    |>Keyword.put(:key, api_key())
-    |>Keyword.put(:latlng, transform_param(params))
-    |>Keyword.put(:location_type, "ROOFTOP")
-    |>URI.encode_query()
-    resp = HTTPoison.get!("#{url()}?#{query}")
-    Poison.decode!(resp.body)
-    |>Map.get("results")
-    |>Enum.at(0)
-    |>Map.get("address_components")
-    |>getNameList()
+    latlng = transform_param(params)
+    if latlng != nil do
+      query = []
+      |>Keyword.put(:key, api_key())
+      |>Keyword.put(:latlng, latlng)
+      |>Keyword.put(:location_type, "ROOFTOP")
+      |>URI.encode_query()
+      resp = HTTPoison.get!("#{url()}?#{query}")
+      data = Poison.decode!(resp.body)
+      |>Map.get("results")
+      |>Enum.at(0)
+      |>Map.get("address_components")
+      |>getNameList()
+      %{locations: data}
+    else
+      nil
+    end
   end
 
   def getNameList(address) do
@@ -33,12 +39,14 @@ defmodule Popo.GeocodeApi do
   def transform_param(params) do
     lat = Map.get(params, :latitude)
     lon = Map.get(params, :longitude)
-    "#{lat},#{lon}"
+    if lat != nil && lon != nil do
+      "#{lat},#{lon}"
+    else
+      nil
+    end
   end
 
   def url do
     "https://maps.googleapis.com/maps/api/geocode/json"
   end
-
-
 end

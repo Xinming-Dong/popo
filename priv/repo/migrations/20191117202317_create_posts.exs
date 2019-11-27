@@ -9,6 +9,7 @@ defmodule Popo.Repo.Migrations.CreatePosts do
       add :filename, :string
       add :latitude, :float, defaut: nil, null: true
       add :longitude, :float, defaut: nil, null: true
+      add :location, :string, default: nil, null: true
 
 
       timestamps()

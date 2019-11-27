@@ -36,21 +36,32 @@ defmodule PopoWeb.UserController do
   end
 
 
-  def edit(conn, %{"id" => id}) do
-    user = Users.get_user!(id)
-    changeset = Users.change_user(user)
-    render(conn, "edit.html", user: user, changeset: changeset)
+  def edit(conn, %{"id" => id, "type" => type}) do
+      user = Users.get_user!(id)
+      changeset = Users.change_user(user)
+      case type do
+        "post"->
+          render(conn, "edit.html", user: user, changeset: changeset)
+        "user"->
+          render(conn, "edit1.html", user: user, changeset: changeset)
+      end
+
   end
 
-  def update(conn, %{"id" => id, "user" => user_params}) do
+  def update(conn, %{"id" => id, "user" => user_params, "type" =>type}) do
     user = Users.get_user!(id)
-
     case Users.update_user(user, user_params) do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User updated successfully.")
-        |> redirect(to: Routes.user_path(conn, :show, user))
-
+        case type do
+          "post"->
+            conn
+            |>redirect(to: Routes.post_path(conn, :new, %{"type"=>"newpost"}))
+          "user" ->
+            conn
+            |> redirect(to: Routes.user_path(conn, :show, user))
+        end
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", user: user, changeset: changeset)
     end
@@ -64,4 +75,5 @@ defmodule PopoWeb.UserController do
     |> put_flash(:info, "User deleted successfully.")
     |> redirect(to: Routes.user_path(conn, :index))
   end
+
 end

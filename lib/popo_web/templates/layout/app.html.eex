@@ -26,7 +26,7 @@
         </div>
         <li>
 	        <%= if @current_user do %>
-	        <%= link("Nearby", to: Routes.user_path(@conn, :edit, @current_user)) %>
+	        <%= link("Nearby", to: Routes.user_path(@conn, :edit, @current_user.id, type: "user")) %>
 	        <% end %>
 	      </li>
 	      <div class="col-4 text-light">
