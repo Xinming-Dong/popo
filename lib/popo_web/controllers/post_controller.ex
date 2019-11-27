@@ -6,9 +6,10 @@ defmodule PopoWeb.PostController do
   alias Popo.Users
   alias Popo.GeocodeApi
 
+
   def index(conn, params) do
     IO.inspect params
-    user = Users.get_user_with_posts!(conn.assigns[:current_user].id)
+    user = Users.get_user_with_posts!(params["user_id"])
     render(conn, "index.html", user: user)
   end
 
@@ -31,7 +32,7 @@ defmodule PopoWeb.PostController do
       {:ok, _post} ->
         conn
         |> put_flash(:info, "Post created successfully.")
-        |> redirect(to: Routes.post_path(conn, :index))
+        |> redirect(to: Routes.post_path(conn, :index, user_id: conn.assigns[:current_user].id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

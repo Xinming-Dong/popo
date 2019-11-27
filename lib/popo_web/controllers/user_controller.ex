@@ -6,6 +6,7 @@ defmodule PopoWeb.UserController do
 
   def index(conn, params) do
     user=Users.get_user!(params["user_id"])
+    IO.inspect user
     users = Users.get_nearby(user)
     IO.inspect(users)
     render(conn, "index.html", users: users)
@@ -31,6 +32,7 @@ defmodule PopoWeb.UserController do
 
   def show(conn, %{"id" => id}) do
     user = Users.get_user!(id)
+    IO.inspect user
     users = Users.get_nearby(user)
     render(conn, "show.html", users: users, user: user)
   end

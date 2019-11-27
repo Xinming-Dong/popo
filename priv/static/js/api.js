@@ -1,14 +1,3 @@
-var latitude;
-var longtitude;
-
-function getLongtitude(){
-	return longtitude;
-}
-
-function getLatitude(){
-	return latitude;
-}
-
 document.body.onload = function() {showPosition()};
 function showPosition() {
         if(navigator.geolocation) {
@@ -19,7 +8,8 @@ function showPosition() {
                 document.getElementById("result").innerHTML = positionInfo;
 		var latlon = position.coords.latitude + "," + position.coords.longitude;
 
-  var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=15&size=600x300&sensor=false&key=AIzaSyBD687lI9Zy6weGMG3JV4F0tjPd63QxfyU";
+  var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="
+			    +latlon+"&markers=color:red%7C"+latlon+"&zoom=15&size=600x300&sensor=false&key=AIzaSyBD687lI9Zy6weGMG3JV4F0tjPd63QxfyU";
 
   document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
             });

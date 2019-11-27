@@ -16,5 +16,6 @@
     <%= error_tag f, :longitude %>
   </div>
 <div>
+
 </div>
 <% end %>

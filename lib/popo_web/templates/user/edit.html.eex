@@ -1,3 +1,5 @@
+
 <%= render "form1.html", Map.put(assigns, :action, Routes.user_path(@conn, :update, @user, type: "post")) %>
+
 
 <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/api1.js") %>"></script>

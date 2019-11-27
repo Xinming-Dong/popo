@@ -39,6 +39,9 @@
   
 
 
-
-<span><%= link "Edit", to: Routes.profile_path(@conn, :edit, @profile) %></span>
+<%= if (@current_user.id == @profile.user.id) do %>
+<span> <%= link "Edit", to: Routes.profile_path(@conn, :edit, @profile) %></span>
 <span><%= link "Back", to: Routes.page_path(@conn, :index) %></span>
+<% else %>
+<span><%= link "Back", to: Routes.user_path(@conn, :show, @current_user.id) %></span>
+<% end %>

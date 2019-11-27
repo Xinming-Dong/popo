@@ -1,5 +1,5 @@
 <h1>Show Users</h1>
-
+<%= if @users do %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -9,9 +9,10 @@
     </tr>
   </thead>
    <tbody>
+  
     <%= for user <- @users do %>
     <tr>
-      <td><%= user.name %></td>
+      <td><%= link( user.name, to: Routes.profile_path(@conn, :show, user)) %></td>
 
       <td>
         <span><a class="nav-link" href="#">chat</a></span>
@@ -20,16 +21,18 @@
         <span><a class="nav-link" href="#">+add</a></span>
        </td>
        <td>
-	    <span><a class="nav-link" href="#">show posts</a></span>
+	<%= link( "show posts", to: Routes.post_path(@conn, :index, user_id: user.id)) %>
       </td>
     </tr>
     <% end %>
   </tbody>
 </table>
+<% else %>
+    <p>Please enable location.</p> 
+<% end %>
 
 
 
 
 
-<span><%= link "Back", to: Routes.user_path(@conn, :index) %></span>
-<span><%= link "Edit", to: Routes.profile_path(@conn, :edit, @user.id) %></span>
+<span><%= link "Back", to: Routes.page_path(@conn, :index) %></span>

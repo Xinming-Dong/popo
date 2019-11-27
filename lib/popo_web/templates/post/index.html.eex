@@ -1,5 +1,8 @@
 <h1>Posts</h1>
+
+<%= if (@current_user.id == @user.id) do %>
 <p><%= link("New Post", to: Routes.post_path(@conn, :new, %{"type" =>"updateLocation"})) %></p>
+<% end %>
 
 <div class="column">
   <%= for post <- @user.posts do %>
@@ -20,3 +23,8 @@
   <% end %>
 </div>
 
+<%= if (@current_user.id == @user.id) do %>
+<p><%= link("Back", to: Routes.page_path(@conn, :index)) %></p>
+<% else %>
+<span><%= link "Back", to: Routes.user_path(@conn, :show, @current_user.id) %></span>
+<% end %>

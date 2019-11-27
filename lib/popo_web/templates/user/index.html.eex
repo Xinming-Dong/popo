@@ -9,7 +9,8 @@
     </tr>
   </thead>
   <tbody>
-<%= for user <- @users do %>
+ <%= if @users do %> 
+  <%= for user <- @users do %>
     <tr>
       <td><%= user.name %></td>
 
@@ -23,6 +24,7 @@
 	<span><a class="nav-link" href="#">show posts</a></span>
       </td>
     </tr>
+  <% end %>
 <% end %>
   </tbody>
 </table>
