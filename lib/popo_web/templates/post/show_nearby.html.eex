@@ -11,7 +11,7 @@
           <p class="card-text"><%= post.location %></p>
         <% end %>
         <p class="card-text"><%= post.updated_at%></p>
-        <span class="card-link"><%= link "Delete", to: Routes.post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <span class="card-link"><%= link "View", to: Routes.post_path(@conn, :show, post, type: "view") %></span>
       </div>
     </div>
 <% end %>
