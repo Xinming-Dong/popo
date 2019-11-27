@@ -13,7 +13,6 @@ defmodule Popo.GeocodeApi do
     |>Map.get("address_components")
     |>getNameList()
   end
-
   def getNameList(address) do
     address
     |> Enum.filter(fn x -> !isExcludeTypes?(Map.get(x, "types")) end)
@@ -39,6 +38,5 @@ defmodule Popo.GeocodeApi do
   def url do
     "https://maps.googleapis.com/maps/api/geocode/json"
   end
-
 
 end

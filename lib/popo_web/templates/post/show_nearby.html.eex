@@ -8,7 +8,6 @@
       <div class="card-body">
         <p class="card-text"><%= post.description %></p>
         <p class="card-text"><%= post.updated_at%></p>
-        <span class="card-link"><%= link "Edit", to: Routes.post_path(@conn, :edit, post) %></span>
         <span class="card-link"><%= link "Delete", to: Routes.post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </div>
     </div>
@@ -16,3 +15,4 @@
 
 
 <span><%= link "New Post", to: Routes.post_path(@conn, :new) %></span>
+<span><%= link "Back", to: Routes.page_path(@conn, :index) %></span>
