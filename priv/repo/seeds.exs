@@ -13,4 +13,8 @@
 alias Popo.Users.User
 alias Popo.Repo
 
+# alias Popo.F
+
 Repo.insert!(%User{email: "aa@aa", name: "aa", password: "123456789012"})
+Repo.insert!(%User{email: "bb@bb", name: "bb", password: "123456789012"})
+

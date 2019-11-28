@@ -18,7 +18,14 @@ import "phoenix_html"
 
 import socket from "./socket"
 
-let channel = socket.channel('popo:lobby', {}); // connect to chat "popo"
+let ul = document.getElementById('msg-list');        // list of messages.
+let msg = document.getElementById('msg');            // message input field
+let id = document.getElementById("chat_config").getAttribute("user_id");
+let name = document.getElementById("chat_config").getAttribute("user_name");
+console.log(id);
+console.log(name)
+
+let channel = socket.channel('popo:lobby', {id: id}); // connect to chat "popo"
 
 channel.on('shout', function (payload) { // listen to the 'shout' event
   let li = document.createElement("li"); // create new list item DOM element
@@ -31,18 +38,12 @@ channel.on('shout', function (payload) { // listen to the 'shout' event
 channel.join(); // join the channel.
 
 
-let ul = document.getElementById('msg-list');        // list of messages.
-let msg = document.getElementById('msg');            // message input field
-let id = document.getElementById("chat_config").getAttribute("user_id");
-let name = document.getElementById("chat_config").getAttribute("user_name");
-console.log(id);
-console.log(name)
-
 // "listen" for the [Enter] keypress event to send a message:
 msg.addEventListener('keypress', function (event) {
   if (event.keyCode == 13 && msg.value.length > 0) { // don't sent empty msg.
     channel.push('shout', { // send the message to the server on "shout" channel
       id: id,
+      to: '2',
       name: name,     // get value of "name" of person sending the message
       message: msg.value    // get message text (value) from msg input field.
     });
