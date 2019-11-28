@@ -20,7 +20,8 @@ defmodule PopoWeb.PostController do
         |>redirect(to: Routes.user_path(conn, :edit, conn.assigns[:current_user].id, type: "post"))
       "newpost" ->
         changeset = Posts.change_post(%Post{})
-        locations = GeocodeApi.getLocation(%{:latitude=>conn.assigns[:current_user].latitude, :longitude=>conn.assigns[:current_user].longitude})
+        locations = GeocodeApi.getLocation(%{:latitude=>conn.assigns[:current_user].latitude,
+        :longitude=>conn.assigns[:current_user].longitude})
         render(conn, "new.html", changeset: changeset, locations: locations)
     end
   end
