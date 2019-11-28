@@ -36,7 +36,6 @@ defmodule PopoWeb.PopoChannel do
     time = DateTime.utc_now()
     Messages.create_message(%{from: int_id, to: 2, content: msg, time: time})
     broadcast socket, "shout", payload
-    # broadcast("popo:" <> "2" , "shout", payload) #sends the message to all connected clients for the to_user
     {:noreply, socket}
   end
 

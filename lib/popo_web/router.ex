@@ -25,6 +25,8 @@ defmodule PopoWeb.Router do
     resources "/profiles", ProfileController
     resources "/posts", PostController
     resources "/messages", MessageController
+    resources "/friends", FriendController
+    
     get "/posts/:id/file", PostController, :file
     get "/profiles/:id/file", ProfileController, :file
 
