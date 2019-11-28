@@ -27,8 +27,10 @@ defmodule Popo.MapApi do
   def users_markers(users) do
    mks = Enum.map(users, fn x->"markers=green%7C"<>to_string(x.latitude)<>"%2C"<>to_string(x.longitude) end)
 	|> Enum.join("&")
-   if (length(users) > 0) do
+   if (users != nil and length(users) > 0) do
      "&"<>mks
+   else 
+     ""
    end
 
   end
