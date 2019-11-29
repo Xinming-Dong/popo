@@ -30,7 +30,7 @@
     <%= label f, :location %>
     <%= select f, :location, @locations %>
   </div>
-<%= end %>  
+<% end %>  
 
   
   <div>

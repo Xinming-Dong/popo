@@ -44,10 +44,16 @@ defmodule Popo.Posts do
   def get_nearby(user) do
     query = from u in Post,
           where: (u.longitude - ^user.longitude)*(u.longitude - ^user.longitude) +
- (u.latitude - ^user.latitude) * (u.latitude - ^user.latitude) < 0.000072 and u.user_id != ^user.id, 
+ (u.latitude - ^user.latitude) * (u.latitude - ^user.latitude) < 0.000072 and u.user_id != ^user.id,
     preload: [:user]
     Repo.all(query)
 
+  end
+
+  def get_at_location(location) do
+    query = from p in Post,
+    where: p.location == ^location
+    Repo.all(query)
   end
 
   @doc """

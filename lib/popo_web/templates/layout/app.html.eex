@@ -19,7 +19,7 @@
             <%= if @current_user do %>
               <%= link( "Your Posts", to: Routes.post_path(@conn, :index, user_id: @current_user.id)) %>
 	      <%= if @current_user.latitude do %>
-              |<%= link( "Nearby Posts", to: Routes.post_path(@conn, :show, @current_user, type: "nearby")) %>
+              |<%= link( "Nearby Posts", to: Routes.post_path(@conn, :show, @current_user, type: "nearby", location: nil)) %>
 	      <% end %>
             <% end %>
           </ul>

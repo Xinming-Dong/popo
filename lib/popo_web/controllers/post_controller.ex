@@ -40,15 +40,18 @@ defmodule PopoWeb.PostController do
     end
   end
 
-  def show(conn, %{"id" => id, "type" => display}) do
-    if (display != "nearby") do
-      post = Posts.get_post!(id)
-
-      render(conn, "show.html", post: post)
-    else
-      user = Users.get_user!(id)
-      posts = Posts.get_nearby(user)
-      render(conn, "show_nearby.html", posts: posts)
+  def show(conn, %{"id" => id, "type" => display, "location" => location}) do
+    cond do
+      display == "nearby"->
+        user = Users.get_user!(id)
+        posts = Posts.get_nearby(user)
+        render(conn, "show_nearby.html", posts: posts, location: nil)
+      display == "location"->
+        posts = Posts.get_at_location(location)
+        render(conn, "show_nearby.html", posts: posts, location: location)
+      true ->
+        post = Posts.get_post!(id)
+        render(conn, "show.html", post: post)
     end
   end
 
@@ -91,9 +94,5 @@ defmodule PopoWeb.PostController do
     |> send_resp(200, data)
   end
 
-  def locations(conn, %{"latlng" => latlng}) do
-    IO.inspect latlng
-    locations = GeocodeApi.getLocation(latlng)
-    json(conn, locations)
-  end
+
 end

@@ -27,7 +27,6 @@ defmodule PopoWeb.Router do
     resources "/messages", MessageController
     get "/posts/:id/file", PostController, :file
     get "/profiles/:id/file", ProfileController, :file
-    get "/posts/locations/:latlng", PostController, :locations
   end
 
   # Other scopes may use custom stacks.

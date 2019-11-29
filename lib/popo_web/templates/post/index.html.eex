@@ -13,14 +13,14 @@
       <div class="card-body">
         <p class="card-text"><%= post.description %></p>
         <%= if post.location do %>
-          <p class="card-text"><%= post.location %></p>
+          <p class="card-text"><%= link( post.location, to: Routes.post_path(@conn, :show, @current_user, type: "location", location: post.location)) %></p>
         <% end %>
         <p class="card-text"><%= post.updated_at%></p>
         <%= if (@current_user.id == @user.id) do %>
           <span class="card-link"><%= link "Edit", to: Routes.post_path(@conn, :edit, post) %></span>
           <span class="card-link"><%= link "Delete", to: Routes.post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"] %></span>
         <% else %>
-          <span class="card-link"><%= link "View", to: Routes.post_path(@conn, :show, post, type: "view") %></span>
+          <span class="card-link"><%= link "View", to: Routes.post_path(@conn, :show, post, type: "view", location: nil) %></span>
         <% end %>
       </div>
     </div>
