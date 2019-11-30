@@ -11,6 +11,8 @@ defmodule Popo.Users.User do
     field :password_confirmation, :string, virtual: true
     has_one :profile, Popo.Profiles.Profile
     has_many :posts, Popo.Posts.Post
+    has_many :messages, Popo.Messages.Message
+    has_many :friends, Popo.Friends.Friend
 
 
     timestamps()

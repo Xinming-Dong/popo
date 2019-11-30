@@ -1,0 +1,16 @@
+<div class="row">
+  <div id="chat_config"
+    user_id="<%= @id%>"
+    user_name="<%= @name%>">
+  </div>
+  <div class="col-12">
+    <h1>Welcome to Popo App</h1>
+    <div class="row vh-100">
+      <div class="col-xs-12">
+        <ul id='msg-list' style='list-style: none; min-height:200px; padding: 10px;'></ul>
+        <input type="text" id="to" class="form-control" placeholder="Receiver">
+        <input type="text" id="msg" class="form-control" placeholder="Your Message">
+      </div>
+    </div>
+  </div>
+</div>
