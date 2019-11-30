@@ -8,6 +8,11 @@ defmodule Popo.Friends do
 
   alias Popo.Friends.Friend
 
+  def get_friend_list_by_user_id(id) do
+    query = from f in "friends", where: f.user_1 == ^id, select: %{user_2_id: f.user_2}
+    Repo.all(query)
+  end
+
   @doc """
   Returns the list of friends.
 

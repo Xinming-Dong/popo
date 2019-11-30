@@ -7,12 +7,10 @@ defmodule PopoWeb.SessionController do
 
   def create(conn, %{"email" => email}) do
     user = Popo.Users.get_user_by_email(email)
-    IO.puts "inspect user"
+    IO.puts ">>>>>>>>>>> session controllser create"
     IO.inspect user
     id = user.id
-    IO.inspect id
     name = user.name
-    IO.inspect name
     if user do
       conn
       |> put_session(:user_id, user.id)
