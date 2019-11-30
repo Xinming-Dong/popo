@@ -1,4 +1,12 @@
 <%= form_for @conn, Routes.session_path(@conn, :create), fn f -> %>
+
+<body>
+<header>
+
+<div class = "login-form">
+  <div class="logo" >
+    <img  src="/images/logo2.png" class="popo-logo">
+  </div>
   <div class="form-group">
     <%= label f, :email %>
     <%= text_input f, :email, class: "form-control" %>
@@ -10,8 +18,14 @@
     <%= error_tag f, :password %>
   </div>
 
-  <div>
+  <div class="form-login">
     <%= submit "Log In", class: "btn btn-primary" %>
   </div>
+</div>
+
+
+</header>
+</body>
 <% end %>
+
 

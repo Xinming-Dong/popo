@@ -4,29 +4,37 @@
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
-<div class="form-group">
-    <%= label f, :email %>
-    <%= text_input f, :email, class: "form-control" %>
-    <%= error_tag f, :email %>
-  </div>
-  <div class="form-group">
-    <%= label f, :name %>
-    <%= text_input f, :name, class: "form-control" %>
-    <%= error_tag f, :name %>
-  </div>
-  <div class="form-group">
-    <%= label f, :password %>
-    <%= password_input f, :password, class: "form-control" %>
-    <%= error_tag f, :password %>
-  </div>
 
-  <div class="form-group">
-    <%= label f, :password_confirmation %>
-    <%= password_input f, :password_confirmation, class: "form-control" %>
-    <%= error_tag f, :password_confirmation %>
+<div class="signup-form">
+  <div class="logo" >
+    <img src="/images/logo2.png">
   </div>
+  <div class="input-table">
+    <div class="form-group">
+      <%= label f, :email %>
+      <%= text_input f, :email, class: "form-control" %>
+      <%= error_tag f, :email %>
+    </div>
+    <div class="form-group">
+      <%= label f, :name %>
+      <%= text_input f, :name, class: "form-control" %>
+      <%= error_tag f, :name %>
+    </div>
+    <div class="form-group">
+      <%= label f, :password %>
+      <%= password_input f, :password, class: "form-control" %>
+      <%= error_tag f, :password %>
+    </div>
+    <div class="form-group">
+      <%= label f, :password_confirmation %>
+      <%= password_input f, :password_confirmation, class: "form-control" %>
+      <%= error_tag f, :password_confirmation %>
+    </div>
 
-  <div>
-    <%= submit "Save", class: "btn btn-primary" %>
+    <div>
+      <%= submit "Save", class: "btn btn-primary" %>
+    </div>
   </div>
+</div>
+
 <% end %>

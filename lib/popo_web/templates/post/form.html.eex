@@ -4,36 +4,45 @@
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
-  
-<div class="form-group">
-  <%= label f, :description %>
-  <%= text_input f, :description %>
-  <%= error_tag f, :description %>
-</div>
 
-<div class="form-group">
-  <%= label f, :photo %>
-  <%= file_input f, :photo, class: "form-control btn btn-file" %>
-  <%= error_tag f, :photo %>
-</div>
-<div class="form-group">
+
+<div class="post-form"> 
+  <div class="post-button">
+    <span class="post-cancel" style="display:inline-block;">
+      <%= link("Cancel", to: Routes.page_path(@conn, :index)) %>
+    </span>
+    <span class="post-post">
+    <%= submit "Post", class: "btn btn-primary" %>
+    </span>
+  </div>
+
+  <div class="form-group">
+    <%= textarea f, :description,class: "post-desc", placeholder: "Say something..."%>
+    <%= error_tag f, :description %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :photo %>
+    <%= file_input f, :photo %>
+    <%= error_tag f, :photo %>
+  </div>
+
+
+  <div class="form-group">
     <%= hidden_input f, :latitude, class: "form-control" , id: "latitude" %>
     <%= error_tag f, :latitude %>
   </div>
-<div class="form-group">
+  <div class="form-group">
    <%= hidden_input f, :longitude, class: "form-control", id: "longitude"%>
    <%= error_tag f, :longitude %>
+  </div>
+
+
+  <%= if @locations do %>
+    <div class="post-location">
+      <%= label f, :location %>
+      <%= select f, :location, @locations  %>
+    </div>
+  <%= end %>  
 </div>
-
-<%= if @locations do %>
-  <div class="form-group">
-    <%= label f, :location %>
-    <%= select f, :location, @locations %>
-  </div>
-<% end %>  
-
-  
-  <div>
-    <%= submit "Save" %>
-  </div>
 <% end %>
