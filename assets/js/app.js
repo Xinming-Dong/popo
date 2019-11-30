@@ -49,11 +49,11 @@ channel.on('msg_history', function(payload) {
   if (msg_list) {
     msg_list.forEach(function(m) {
       let li = document.createElement("li");
-      li.innerHTML = "<b>" + m.from + "</b>: " + m.content + "  " + m.time;
+      console.log(m.time);
+      li.innerHTML = "<b>" + m.from + "</b>: " + m.content;
       ul.appendChild(li);
     })
   }
-
 })
 
 channel.join(); // join the channel.
@@ -76,6 +76,7 @@ msg.addEventListener('keypress', function (event) {
 
 friends.forEach(function(friend) {
   friend.addEventListener('click', function() {
+    msg.style.visibility = "visible";
     target = friend.getAttribute("id");
     console.log(target);
     channel.push('msg_history', {

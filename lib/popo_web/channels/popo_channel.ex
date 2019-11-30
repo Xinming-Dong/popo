@@ -34,7 +34,7 @@ defmodule PopoWeb.PopoChannel do
     %{"id" => id, "to" => target, "message" => msg, "name" => name} = payload
     {int_id, _} = Integer.parse(id)
     {int_target, _} = Integer.parse(target)
-    time = DateTime.utc_now()
+    time = NaiveDateTime.utc_now()
     Messages.create_message(%{from: int_id, to: int_target, content: msg, time: time})
     broadcast socket, "shout", payload
     {:noreply, socket}
@@ -47,7 +47,7 @@ defmodule PopoWeb.PopoChannel do
     {int_to, _} = Integer.parse(to)
     msg_history = Messages.msg_history(int_from, int_to) # Messages.get_msg_history(from, to)
     msg_history = Enum.map(msg_history, fn m -> 
-      %{from: Popo.Users.get_user_name_by_id(m.from).name, time: m.time, content: m.content}
+      %{from: Popo.Users.get_user_name_by_id(m.from).name, time: NaiveDateTime.to_string(m.time), content: m.content}
     end)
     reply = %{to: Popo.Users.get_user_name_by_id(int_to).name, msg_list: msg_history}
     IO.inspect reply
@@ -68,13 +68,6 @@ defmodule PopoWeb.PopoChannel do
     end
     {:noreply, socket}
   end
-
-  # def handle_out("msg_history", payload, socket) do
-  #   IO.puts ">>>>>>>>>> message history"
-  #   if socket.assigns[:user] == payload["id"] do
-  #     push socket
-  #   end
-  # end
 
   # Add authorization logic here as required.
   defp authorized?(_payload) do
