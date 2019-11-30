@@ -1,7 +1,5 @@
-<h4>Your Location</h4>
-<div id="result"></div>
-<div id="mapholder"></div>
 
-<%= render "form1.html", Map.put(assigns, :action, Routes.user_path(@conn, :update, @user)) %>
+<%= render "form1.html", Map.put(assigns, :action, Routes.user_path(@conn, :update, @user, type: "post")) %>
 
-<script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/api.js") %>"></script>
+
+<script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/api1.js") %>"></script>

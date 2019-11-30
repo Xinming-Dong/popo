@@ -22,9 +22,13 @@ defmodule Popo.Users do
   end
 
   def get_nearby(user) do
-    query = from u in User,
+    if user.longitude == nil || user.latitude == nil do
+      nil
+    else
+      query = from u in User,
           where: (u.longitude - ^user.longitude)*(u.longitude - ^user.longitude) + (u.latitude - ^user.latitude) * (u.latitude - ^user.latitude) < 0.000072 and u.id != ^user.id
-    Repo.all(query)
+      Repo.all(query)
+    end
   end
 
   def get_user_by_email(email) do

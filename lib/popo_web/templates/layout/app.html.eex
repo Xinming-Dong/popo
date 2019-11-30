@@ -19,14 +19,14 @@
             <%= if @current_user do %>
               <%= link( "Your Posts", to: Routes.post_path(@conn, :index)) %>
 	      <%= if @current_user.latitude do %>
-              <%= link( "Nearby Posts", to: Routes.post_path(@conn, :show, @current_user, type: "nearby")) %>
+              |<%= link( "Nearby Posts", to: Routes.post_path(@conn, :show, @current_user, type: "nearby", location: nil)) %>
 	      <% end %>
             <% end %>
           </ul>
         </div>
         <li>
 	        <%= if @current_user do %>
-	        <%= link("Nearby", to: Routes.user_path(@conn, :edit, @current_user)) %>
+	        <%= link("Nearby", to: Routes.user_path(@conn, :edit, @current_user.id, type: "user")) %>
 	        <% end %>
 	      </li>
 	      <div class="col-4 text-light">

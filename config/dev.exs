@@ -55,6 +55,7 @@ config :popo, PopoWeb.Endpoint,
       ~r{lib/popo_web/templates/.*(eex)$}
     ]
   ]
+config :popo, :map_api_key, "AIzaSyBD687lI9Zy6weGMG3JV4F0tjPd63QxfyU"
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"

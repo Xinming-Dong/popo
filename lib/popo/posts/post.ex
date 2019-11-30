@@ -8,6 +8,7 @@ defmodule Popo.Posts.Post do
     field :filename, :string
     field :latitude, :float
     field :longitude, :float
+    field :location, :string
 
     belongs_to :user, Popo.Users.User
 
@@ -19,7 +20,7 @@ defmodule Popo.Posts.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:description, :photo, :latitude, :longitude, :user_id])
+    |> cast(attrs, [:description, :photo, :latitude, :longitude, :user_id, :location])
     |> validate_required([:user_id])
     |> generate_uuid()
     |> save_photo_upload()
