@@ -9,7 +9,7 @@ defmodule PopoWeb.PostController do
 
   def index(conn, params) do
     IO.inspect params
-    user = Users.get_user_with_posts!(params["user_id"])
+    user = Users.get_user_with_posts!(conn.assigns[:current_user].id)
     render(conn, "index.html", user: user)
   end
 
@@ -20,7 +20,7 @@ defmodule PopoWeb.PostController do
         |>redirect(to: Routes.user_path(conn, :edit, conn.assigns[:current_user].id, type: "post"))
       "newpost" ->
         changeset = Posts.change_post(%Post{})
-        locations = GeocodeApi.getLocation(%{:latitude=>conn.assigns[:current_user].latitude,
+        locations = GeocodeApi.getPOI(%{:latitude=>conn.assigns[:current_user].latitude,
         :longitude=>conn.assigns[:current_user].longitude})
         render(conn, "new.html", changeset: changeset, locations: locations)
     end

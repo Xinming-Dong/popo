@@ -9,15 +9,56 @@ defmodule Popo.GeocodeApi do
       |>Keyword.put(:location_type, "ROOFTOP")
       |>URI.encode_query()
       resp = HTTPoison.get!("#{url()}?#{query}")
-      data = Poison.decode!(resp.body)
+      Poison.decode!(resp.body)
       |>Map.get("results")
       |>Enum.at(0)
       |>Map.get("address_components")
       |>getNameList()
-      %{locations: data}
     else
       nil
     end
+  end
+
+  def getPOI(params, placetype, distance) do
+    latlng = transform_param(params)
+    if latlng != nil do
+      query = []
+      |>Keyword.put(:key, api_key())
+      |>Keyword.put(:location, latlng)
+      |>Keyword.put(:radius, distance)
+      |>Keyword.put(:type, placetype)
+      |>Keyword.put(:rankby, "prominence")
+      |>URI.encode_query()
+      resp = HTTPoison.get!("#{url1()}?#{query}")
+      Poison.decode!(resp.body)|>getPOIName()
+    end
+  end
+
+  def getPOI(params, distance) do
+    data = placeTypes()
+    |>Enum.flat_map(fn x -> getPOI(params, x, to_string(distance)) end)
+    |> Enum.uniq()
+    IO.inspect data
+    if data|> Enum.count() < 3 do
+      getPOI(params, distance + 100)
+    else
+      data
+    end
+  end
+
+  def getPOI(params) do
+    distance = 200
+    Enum.concat(getPOI(params, distance), getLocation(params)) |> Enum.uniq()
+  end
+
+  def placeTypes() do
+    ["point_of_interest", "restaurant"]
+  end
+
+  def getPOIName(data) do
+    data
+    |>Map.get("results")
+    |>Enum.map(fn x -> Map.get(x, "name") end)
   end
   def getNameList(address) do
     address
@@ -32,8 +73,7 @@ defmodule Popo.GeocodeApi do
   end
 
   def api_key do
-	"AIzaSyBD687lI9Zy6weGMG3JV4F0tjPd63QxfyU"
-   # Application.get_env(:popo, :api_key)
+   Application.get_env(:popo, :api_key)
   end
 
   def transform_param(params) do
@@ -50,4 +90,7 @@ defmodule Popo.GeocodeApi do
     "https://maps.googleapis.com/maps/api/geocode/json"
   end
 
+  def url1 do
+    "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
+  end
 end

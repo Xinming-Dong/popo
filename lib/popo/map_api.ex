@@ -29,12 +29,12 @@ defmodule Popo.MapApi do
 	|> Enum.join("&")
    if (users != nil and length(users) > 0) do
      "&"<>mks
-   else 
+   else
      ""
    end
 
   end
- 
+
 
   def api_key do
     "AIzaSyBD687lI9Zy6weGMG3JV4F0tjPd63QxfyU"
