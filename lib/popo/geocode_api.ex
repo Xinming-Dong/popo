@@ -36,11 +36,17 @@ defmodule Popo.GeocodeApi do
       |>Keyword.put(:rankby, "prominence")
       |>URI.encode_query()
       resp = HTTPoison.get!("#{url1()}?#{query}")
-      Poison.decode!(resp.body)|>getPOIName()
+      data = Poison.decode!(resp.body)
+      case Map.get(data, "status") do
+        "OK" ->
+          data|>getPOIName()
+        _ ->
+          []
+        end
     end
   end
 
-  def getPOI(params, distance) do
+  def getPOI(params, distance) when distance < 20000 do
     data = placeTypes()
     |>Enum.flat_map(fn x -> getPOI(params, x, to_string(distance)) end)
     |> Enum.uniq()
@@ -50,6 +56,10 @@ defmodule Popo.GeocodeApi do
     else
       data
     end
+  end
+
+  def getPOI(_params, distance) when distance >= 20000 do
+    []
   end
 
   def getPOI(params) do
