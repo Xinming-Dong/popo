@@ -4,8 +4,9 @@
   <h1>Nearby Posts</h1>
 <% end %>
 
+
 <%= for post <- @posts do %>
-    <div class="card row-4">
+    <div class="card row-nearby">
       <%= if post.uuid do %>
         <%= img_tag(Routes.post_path(@conn, :file, post), class: "card-img-top") %>
       <% end %>
