@@ -37,8 +37,7 @@ defmodule Popo.MapApi do
 
 
   def api_key do
-    "AIzaSyBD687lI9Zy6weGMG3JV4F0tjPd63QxfyU"
-   # Application.get_env(:popo, :api_key)
+    Application.get_env(:popo, :api_key)
   end
 
   def transform_param(user) do
