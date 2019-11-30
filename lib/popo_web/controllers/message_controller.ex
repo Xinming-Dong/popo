@@ -5,7 +5,12 @@ defmodule PopoWeb.MessageController do
   alias Popo.Messages.Message
 
   def chat(conn, %{"id" => id, "name" => name}) do
-    render(conn, "chat.html", id: id, name: name)
+    {int_id, _} = Integer.parse(id)
+    friends = Popo.Friends.get_friend_list_by_user_id(int_id) # get list of friends
+    friends = Enum.map(friends, fn fr ->
+      %{user_2_id: fr.user_2_id, user_2_name: Popo.Users.get_user_name_by_id(fr.user_2_id).name}
+    end)
+    render(conn, "chat.html", id: id, name: name, friends: friends)
   end
 
   def index(conn, _params) do

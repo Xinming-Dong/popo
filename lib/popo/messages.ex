@@ -8,6 +8,16 @@ defmodule Popo.Messages do
 
   alias Popo.Messages.Message
 
+  def msg_history(from, to) do
+    # get message history
+    query = from(m in Message, 
+      where: [from: ^from, to: ^to], 
+      or_where: [from: ^to, to: ^from], 
+      select: %{from: m.from, time: m.time, content: m.content},
+      order_by: [asc: :time])
+    Repo.all(query)
+  end
+
   @doc """
   Returns the list of messages.
 

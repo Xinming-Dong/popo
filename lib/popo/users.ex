@@ -31,10 +31,16 @@ defmodule Popo.Users do
     end
   end
 
- def get_user_by_email(email) do
+  def get_user_by_email(email) do
     Repo.get_by(User, email: email)
   end
-def get_user(id), do: Repo.get(User, id)
+
+  def get_user_name_by_id(id) do
+    query = from u in "users", where: u.id == ^id, select: %{name: u.name}
+    Repo.one(query)
+  end
+
+  def get_user(id), do: Repo.get(User, id)
 
   @doc """
   Gets a single user.
