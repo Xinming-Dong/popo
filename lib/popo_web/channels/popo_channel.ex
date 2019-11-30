@@ -55,21 +55,21 @@ defmodule PopoWeb.PopoChannel do
     {:noreply, socket}
   end
 
-  def handle_in("add_friend", payload, socket) do
-    IO.puts "popo add friend ============"
-    %{"from" => from, "to" => to} = payload
-    {int_from, _} = Integer.parse(from)
-    {int_to, _} = Integer.parse(to)
-    request = %{from_id: from, from_name: Popo.Users.get_user_name_by_id(from).name, to: to}
-    broadcast socket, "add_friend", request
-  end
+  # def handle_in("add_friend", payload, socket) do
+  #   IO.puts "popo add friend ============"
+  #   %{"from" => from, "to" => to} = payload
+  #   {int_from, _} = Integer.parse(from)
+  #   {int_to, _} = Integer.parse(to)
+  #   request = %{from_id: from, from_name: Popo.Users.get_user_name_by_id(from).name, to: to}
+  #   broadcast socket, "add_friend", request
+  # end
 
-  def handle_in("new_friends", payload, socket) do
-    if (payload.accept) do
-      # add to database: new friends 1-2 & 2-1
-    end
-    broacast socket, "new_friends", payload
-  end
+  # def handle_in("new_friends", payload, socket) do
+  #   if (payload.accept) do
+  #     # add to database: new friends 1-2 & 2-1
+  #   end
+  #   broadcast socket, "new_friends", payload
+  # end
 
   def handle_out("shout", payload, socket) do
     IO.puts ">>>>>>> handle out chat"
@@ -84,20 +84,20 @@ defmodule PopoWeb.PopoChannel do
     {:noreply, socket}
   end
 
-  def handle_out("add_friend", payload, socket) do
-    IO.puts ">>>>>>>> handle out add friend"
-    IO.puts "payload"
-    IO.inspect payload
+  # def handle_out("add_friend", payload, socket) do
+  #   IO.puts ">>>>>>>> handle out add friend"
+  #   IO.puts "payload"
+  #   IO.inspect payload
 
-    if socket.assigns[:user] == payload["to"] do
-      push socket, "add_friend", payload
-    end
-    {:noreply, socket}
-  end
+  #   if socket.assigns[:user] == payload["to"] do
+  #     push socket, "add_friend", payload
+  #   end
+  #   {:noreply, socket}
+  # end
 
-  def handle_out("new_friends", payload, socket) do
-    # send request result back
-  end
+  # def handle_out("new_friends", payload, socket) do
+  #   # send request result back
+  # end
 
   # Add authorization logic here as required.
   defp authorized?(_payload) do

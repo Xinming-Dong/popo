@@ -56,34 +56,34 @@ channel.on('msg_history', function(payload) {
   }
 });
 
-channel.on('add_friend', function(payload) {
+// channel.on('add_friend', function(payload) {
   
-  if (confirm("You have a new friend request")) {
-    console.log("accept");
-    channel.push("new_friends", response = {
-      from: 1,
-      to: 2,
-      accept: true,
-    });
-  } else {
-    console.log("decline");
-    channel.push("new_friends", response = {
-      from: 1,
-      to: 2,
-      accept: false,
-    });
-  }
-});
+//   if (confirm("You have a new friend request")) {
+//     console.log("accept");
+//     channel.push("new_friends", response = {
+//       from: 1,
+//       to: 2,
+//       accept: true,
+//     });
+//   } else {
+//     console.log("decline");
+//     channel.push("new_friends", response = {
+//       from: 1,
+//       to: 2,
+//       accept: false,
+//     });
+//   }
+// });
 
-channel.on("new_friends", function(payload) {
-  if (accept) {
-    window.alert("added");
-    // add to friend list
-  }
-  else {
-    window.alert("declined");
-  }
-});
+// channel.on("new_friends", function(payload) {
+//   if (accept) {
+//     window.alert("added");
+//     // add to friend list
+//   }
+//   else {
+//     window.alert("declined");
+//   }
+// });
 
 channel.join(); // join the channel.
 
