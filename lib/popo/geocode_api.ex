@@ -6,14 +6,20 @@ defmodule Popo.GeocodeApi do
       query = []
       |>Keyword.put(:key, api_key())
       |>Keyword.put(:latlng, latlng)
-      |>Keyword.put(:location_type, "ROOFTOP")
+      |>Keyword.put(:location_type, "APPROXIMATE")
       |>URI.encode_query()
       resp = HTTPoison.get!("#{url()}?#{query}")
-      Poison.decode!(resp.body)
-      |>Map.get("results")
-      |>Enum.at(0)
-      |>Map.get("address_components")
-      |>getNameList()
+      data = Poison.decode!(resp.body)
+      case Map.get(data, "status") do
+        "OK" ->
+          data
+          |>Map.get("results")
+          |>Enum.at(0)
+          |>Map.get("address_components")
+          |>getNameList()
+        _ ->
+          []
+      end
     else
       nil
     end
@@ -40,7 +46,7 @@ defmodule Popo.GeocodeApi do
     |> Enum.uniq()
     IO.inspect data
     if data|> Enum.count() < 3 do
-      getPOI(params, distance + 100)
+      getPOI(params, distance + 300)
     else
       data
     end
