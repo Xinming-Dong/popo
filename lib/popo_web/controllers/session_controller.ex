@@ -15,7 +15,7 @@ defmodule PopoWeb.SessionController do
       conn
       |> put_session(:user_id, user.id)
       |> put_flash(:info, "Welcome back #{user.email}")
-      |> redirect(to: Routes.page_path(conn, :index))
+      |> redirect(to: Routes.page_path(conn, :index, id: id, name: name))
     else
       conn
       |> put_flash(:error, "Login failed.")

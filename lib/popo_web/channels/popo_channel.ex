@@ -2,8 +2,9 @@ defmodule PopoWeb.PopoChannel do
   use PopoWeb, :channel
 
   alias Popo.Messages
+  alias Popo.Friends
 
-  intercept ["shout", "add_friend", "new_friends"]
+  intercept ["shout", "add_friend", "new_friends", "friend_exists"]
 
   def join("popo:lobby", payload, socket) do
     if authorized?(payload) do
@@ -55,49 +56,87 @@ defmodule PopoWeb.PopoChannel do
     {:noreply, socket}
   end
 
-  # def handle_in("add_friend", payload, socket) do
-  #   IO.puts "popo add friend ============"
-  #   %{"from" => from, "to" => to} = payload
-  #   {int_from, _} = Integer.parse(from)
-  #   {int_to, _} = Integer.parse(to)
-  #   request = %{from_id: from, from_name: Popo.Users.get_user_name_by_id(from).name, to: to}
-  #   broadcast socket, "add_friend", request
-  # end
+  def handle_in("add_friend", payload, socket) do
+    IO.puts "popo add friend ============"
+    IO.inspect payload
+    %{"from" => from, "to" => to} = payload
+    {int_from, _} = Integer.parse(from)
+    {int_to, _} = Integer.parse(to)
+    
 
-  # def handle_in("new_friends", payload, socket) do
-  #   if (payload.accept) do
-  #     # add to database: new friends 1-2 & 2-1
-  #   end
-  #   broadcast socket, "new_friends", payload
-  # end
+    # check if they are friend
+    exist = Popo.Friends.check_exist(int_from, int_to)
+    IO.puts "channel exist result"
+    IO.inspect exist
+    if length(exist) == 0 do
+      request = %{from_id: from, from_name: Popo.Users.get_user_name_by_id(int_from).name, to: to}
+      IO.inspect length(exist)
+      broadcast socket, "add_friend", request
+    else
+      request = %{from_id: from, msg: "You are already friends"}
+      broadcast socket, "friend_exists", request    
+    end 
+    {:noreply, socket}
+  end
+
+  def handle_in("new_friends", payload, socket) do
+    IO.puts "popo request response ============"
+    if (payload[:accept]) do
+      %{"from" => from, "to" => to} = payload
+      {int_from, _} = Integer.parse(payload[:from])
+      {int_to, _} = Integer.parse(payload[:to])
+      # add to database: new friends 1-2 & 2-1
+      Friends.create_friend(%{user_1: int_from, user_2: int_to})
+      Friends.create_friend(%{user_1: int_to, user_2: int_from})
+      IO.puts "accepted"     
+    end
+    broadcast socket, "new_friends", payload
+    {:noreply, socket}
+  end
 
   def handle_out("shout", payload, socket) do
-    IO.puts ">>>>>>> handle out chat"
-    IO.puts "socket"
-    IO.inspect socket.assigns
-    IO.puts "payload"
-    IO.inspect payload
-    
+    IO.puts ">>>>>>> handle out chat"  
     if socket.assigns[:user] == payload["to"] || socket.assigns[:user] == payload["id"] do
       push socket, "shout", payload
     end
     {:noreply, socket}
   end
 
-  # def handle_out("add_friend", payload, socket) do
-  #   IO.puts ">>>>>>>> handle out add friend"
-  #   IO.puts "payload"
-  #   IO.inspect payload
+  def handle_out("add_friend", payload, socket) do
+    IO.puts ">>>>>>>> handle out add friend"
+    IO.puts "socket"
+    IO.inspect socket.assigns
+    IO.puts "payload"
+    IO.inspect payload
+    if socket.assigns[:user] == payload[:to] do
+      IO.puts "handle out add request to target"
+      push socket, "add_friend", payload
+    end
+    {:noreply, socket}
+  end
 
-  #   if socket.assigns[:user] == payload["to"] do
-  #     push socket, "add_friend", payload
-  #   end
-  #   {:noreply, socket}
-  # end
+  def handle_out("new_friends", payload, socket) do
+    # send request result back
+    IO.puts ">>>>>>>> handle out confirm response"
+    IO.inspect socket
+    IO.inspect payload
+    if socket.assigns[:user] == payload["from_id"] do
+      IO.puts "response in add"
+      push socket, "new_friends", payload
+    end
+    {:noreply, socket}
+  end
 
-  # def handle_out("new_friends", payload, socket) do
-  #   # send request result back
-  # end
+  def handle_out("friend_exists", payload, socket) do
+    IO.puts ">>>>>>>> friend already exist"
+    IO.inspect socket
+    IO.inspect payload
+    if socket.assigns[:user] == payload[:from_id] do
+      IO.puts "response in exist"
+      push socket, "friend_exists", payload
+    end
+    {:noreply, socket}
+  end
 
   # Add authorization logic here as required.
   defp authorized?(_payload) do

@@ -1,6 +1,5 @@
 <div class="row">
   <div class="col-12">
     <h1>Welcome to Popo App</h1>
-    <%= link( "chat", to: Routes.message_path(@conn, :chat)) %>
   </div>
 </div>

@@ -17,9 +17,17 @@
         <div class="col-4">
           <ul class="navbar-nav mr-auto">
             <%= if @current_user do %>
+            
+
+              <%#  ------------ configurations -------------  %>
+              <div id="config" user_id="<%= @current_user.id%>" user_name="<%= @current_user.name%>" ></div>
+              <%#  ------------ end -------------  %>
+
+
               <%= link( "Your Posts", to: Routes.post_path(@conn, :index)) %>
 	      <%= if @current_user.latitude do %>
               |<%= link( "Nearby Posts", to: Routes.post_path(@conn, :show, @current_user, type: "nearby", location: nil)) %>
+              |<%= link( "chat", to: Routes.message_path(@conn, :chat, id: @current_user.id)) %>
 	      <% end %>
             <% end %>
           </ul>
