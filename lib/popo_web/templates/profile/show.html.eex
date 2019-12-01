@@ -1,41 +1,40 @@
 <h1>Show Profile</h1>
+<div class="profile-show">
 
-<ul>
-  <li>
+  
+      <%= if @profile.uuid do %>
+        <div class="circular">
+          <%= img_tag(Routes.profile_path(@conn, :file, @profile), 
+        class: "card-img-top profile-photo") %>
+        </div>
+      <% end %>
+ <div class="profile-info"> 
+  <div>
     <strong>Email:</strong>
     <%= @profile.user.email %>
-  </li>
+  </div>
 
-  <li>
+  <div>
     <strong>Name:</strong>
     <%= @profile.user.name %>
-  </li>
+  </div>
 
-  <li>
+  <div>
     <strong>Dob:</strong>
     <%= @profile.dob %>
-  </li>
+  </div>
 
-  <li>
+  <div>
     <strong>Gender:</strong>
     <%= @profile.gender %>
-  </li>
-
-  <li>
-    <strong>Intro:</strong>
-    <%= @profile.intro %>
-  </li>
-  
-  <li>
-  <strong>Profile Picture:</strong>
-  <div class="card">
-      <%= if @profile.uuid do %>
-        <%= img_tag(Routes.profile_path(@conn, :file, @profile), 
-        class: "card-img-top") %>
-      <% end %>
   </div>
-  </li>
-  </ul>
+
+  <div>
+    <strong>Intro:</strong>
+    <p><%= @profile.intro %></p>
+  </div>
+  
+ </div>
   
 
 
@@ -45,3 +44,4 @@
 <% else %>
 <span><%= link "Back", to: Routes.user_path(@conn, :show, @current_user.id) %></span>
 <% end %>
+</div>

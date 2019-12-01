@@ -41,7 +41,7 @@
   <%= if @locations do %>
     <div class="post-location">
       <%= label f, :location %>
-      <%= select f, :location, @locations  %>
+      <%= select f, :location, @locations ,class: "location-button" %>
     </div>
   <%= end %>  
 </div>

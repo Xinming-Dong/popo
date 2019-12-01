@@ -14,8 +14,8 @@
       </div>
       <div class="col-xs-12">
         <ul id='msg-list' style='list-style: none; min-height:200px; padding: 10px;'></ul>
-        <input type="text" id="msg" class="form-control" placeholder="Your Message" style="visibility:hidden;">
       </div>
+       <input type="text" id="msg" class="form-control" placeholder="Your Message" style="visibility:hidden;">
     </div>
   </div>
 </div>

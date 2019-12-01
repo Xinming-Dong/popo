@@ -8,33 +8,19 @@ body {
   height:40%;
   background-attachment: fixed;
   background-size: cover;
-
-
+  
 }
 
 
-
-.login-form{
-
-  width: 400px;
-  height: auto;
-  padding: 13px;
-
-  position: absolute;
-  left: 50%;
-  top: 400px;
-  margin-left: -200px;
-  margin-top: -200px;
-
+.col-xs-12{
+  width:600px;
+  height:600px;
   background-color: rgba(240, 255, 255, 0.5);
-
-  border-radius: 10px;
-
-  text-align: center;
-
+  overflow:auto;
 }
 
-.input-table{
+
+.input-form{
 
   width: 400px;
   height: auto;
@@ -42,7 +28,7 @@ body {
 
   position: absolute;
   left: 50%;
-  top: 440px;
+  top: 420px;
   margin-left: -200px;
   margin-top: -200px;
 
@@ -57,7 +43,7 @@ body {
 .profile-form{
 
   width: 400px;
-  height: 350px;
+  height: auto;
   padding: 13px;
 
   position: absolute;
@@ -84,19 +70,31 @@ img{
 
 .logo{
   width: 400px;
-  height: 120px;
-  position: relative;
+  height: auto;
+  
+
+  position: absolute;
   left: 50%;
+  top: 300px;
+  margin-left: -200px;
+  margin-top: -200px;
+
   background-color: rgba(240, 255, 255, 0);
 
+  border-radius: 10px;
 
+  text-align: center;
+
+
+}
+.logo-popo{
+  width:200px;
 }
 
 
 
 .post-form{
   
-
   width: 400px;
   height: 400px;
   padding: 13px;
@@ -110,10 +108,60 @@ img{
   background-color: rgba(240, 255, 255, 0.5);
 
   border-radius: 10px;
-
-  text-align: center;
-
 }
+
+.profile-show{
+  width: 400px;
+  height: auto;
+
+  position: absolute;
+  left: 50%;
+  top: 350px;
+  margin-left: -200px;
+  margin-top: -200px;  
+  background-color: rgba(240, 255, 255, 0.5);
+
+  border-radius: 10px;
+  text-align: center;
+  word-wrap:break-word;
+}
+
+.profile-info{
+  position:relative;
+  top:10px;
+}
+
+.index-circular{
+    display:inline-block;
+    position:relative;
+    width:40px;
+    height:40px;
+    overflow:hidden;
+    border-radius:50%;
+    
+}
+
+.index-circular img{
+    width:auto;
+    height:100%;
+    
+}
+.circular{
+    display:inline-block;
+    position:relative;
+    top:10px;
+    width:100px;
+    height:100px;
+    overflow:hidden;
+    border-radius:50%;
+}
+
+.circular img{
+    width:auto;
+    height:100%;
+    
+}
+
 .post-desc{
  height:200px;
  width:380px;
@@ -123,10 +171,12 @@ img{
   height: 50px;
 }
 .post-cancel{
-  margin-right:250px;
+  margin-right:260px;
 }
-.post-location{
-  margin-right:100px;
+
+
+.location-button{
+  width:100%;
 }
 
 .row-nearby{
@@ -140,6 +190,20 @@ img{
   display:inline-block;
 }
 
+.map-image{
+  text-align:center;
+  
+}
+
+.table-striped{
+  
+  width:600px;
+}
+
+.nearby-page{
+  width:600px;
+  display: block;
+  margin:0 auto;
 
 
-
+}

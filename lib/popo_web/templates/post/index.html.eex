@@ -1,9 +1,13 @@
-<h1>Posts</h1>
+<h1>Your Posts</h1>
 
 <%= if (@current_user.id == @user.id) do %>
 <p><%= link("New Post", to: Routes.post_path(@conn, :new, %{"type" =>"updateLocation"})) %></p>
 <% end %>
-
+<%= if (@current_user.id == @user.id) do %>
+<p><%= link("Back", to: Routes.page_path(@conn, :index)) %></p>
+<% else %>
+<span><%= link "Back", to: Routes.user_path(@conn, :show, @current_user.id) %></span>
+<% end %>
 <div class="column">
   <%= for post <- @user.posts do %>
     <div class="card row-posts">
@@ -17,7 +21,7 @@
         <% end %>
         <p class="card-text"><%= post.updated_at%></p>
         <%= if (@current_user.id == @user.id) do %>
-          <span class="card-link"><%= link "Edit", to: Routes.post_path(@conn, :edit, post) %></span>
+         
           <span class="card-link"><%= link "Delete", to: Routes.post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"] %></span>
         <% else %>
           <span class="card-link"><%= link "View", to: Routes.post_path(@conn, :show, post, type: "view", location: nil) %></span>
@@ -27,8 +31,4 @@
   <% end %>
 </div>
 
-<%= if (@current_user.id == @user.id) do %>
-<p><%= link("Back", to: Routes.page_path(@conn, :index)) %></p>
-<% else %>
-<span><%= link "Back", to: Routes.user_path(@conn, :show, @current_user.id) %></span>
-<% end %>
+

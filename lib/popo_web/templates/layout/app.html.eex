@@ -20,18 +20,20 @@
               <%= link( "Your Posts", to: Routes.post_path(@conn, :index)) %>
 	      <%= if @current_user.latitude do %>
               |<%= link( "Nearby Posts", to: Routes.post_path(@conn, :show, @current_user, type: "nearby", location: nil)) %>
+	      |<%= link( "chat", to: Routes.message_path(@conn, :chat)) %>
 	      <% end %>
             <% end %>
           </ul>
         </div>
-        <li>
+              <li>
 	        <%= if @current_user do %>
 	        <%= link("Nearby", to: Routes.user_path(@conn, :edit, @current_user.id, type: "user")) %>
 	        <% end %>
 	      </li>
+               
 	      <div class="col-4 text-light">
           <%= if @current_user do %>
-	          User: <%= link(@current_user.name,
+	  	          <%= link(@current_user.name,
               to: Routes.profile_path(@conn, :show, @current_user)) %>
             (<%= link("Logout", to: Routes.session_path(@conn, :delete),
               method: :delete) %>)
