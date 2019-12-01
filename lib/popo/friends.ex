@@ -61,6 +61,7 @@ defmodule Popo.Friends do
 
   """
   def create_friend(attrs \\ %{}) do
+    IO.puts ">>>>>>>>>>>>>>> create friend"
     %Friend{}
     |> Friend.changeset(attrs)
     |> Repo.insert()

@@ -16,6 +16,5 @@ defmodule Popo.Friends.Friend do
     friend
     |> cast(attrs, [:user_1, :user_2])
     |> validate_required([:user_1, :user_2])
-    |> unique_constraint(:user_2, name: :friends_user_2_user_1_index)
   end
 end

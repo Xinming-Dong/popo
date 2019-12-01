@@ -11,6 +11,5 @@ defmodule Popo.Repo.Migrations.CreateFriends do
 
     create index(:friends, [:user_1])
     create index(:friends, [:user_2])
-    create unique_index(:friends, [:user_2, :user_1])
   end
 end

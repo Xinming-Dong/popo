@@ -81,11 +81,13 @@ defmodule PopoWeb.PopoChannel do
 
   def handle_in("new_friends", payload, socket) do
     IO.puts "popo request response ============"
-    if (payload[:accept]) do
+    IO.inspect payload
+    if (payload["accept"] == true) do
       %{"from" => from, "to" => to} = payload
-      {int_from, _} = Integer.parse(payload[:from])
-      {int_to, _} = Integer.parse(payload[:to])
+      {int_from, _} = Integer.parse(payload["from"])
+      {int_to, _} = Integer.parse(payload["to"])
       # add to database: new friends 1-2 & 2-1
+      IO.puts ">>>>>>>>>>>>>>> insert friends here"
       Friends.create_friend(%{user_1: int_from, user_2: int_to})
       Friends.create_friend(%{user_1: int_to, user_2: int_from})
       IO.puts "accepted"     
@@ -120,7 +122,7 @@ defmodule PopoWeb.PopoChannel do
     IO.puts ">>>>>>>> handle out confirm response"
     IO.inspect socket
     IO.inspect payload
-    if socket.assigns[:user] == payload["from_id"] do
+    if socket.assigns[:user] == payload["from"] do
       IO.puts "response in add"
       push socket, "new_friends", payload
     end
