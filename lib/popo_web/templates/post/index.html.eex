@@ -1,12 +1,14 @@
 <h1>Your Posts</h1>
 
 <%= if (@current_user.id == @user.id) do %>
-<p><%= link("New Post", to: Routes.post_path(@conn, :new, %{"type" =>"updateLocation"})) %></p>
+<span style="float:right;font-size:25px;" ><%= link("+Post Your New PoPo", to: Routes.post_path(@conn, :new, %{"type" =>"updateLocation"})) %></span>
 <% end %>
 <%= if (@current_user.id == @user.id) do %>
-<p><%= link("Back", to: Routes.page_path(@conn, :index)) %></p>
+<div class="back-yourpost">
+  <span><%= link to: Routes.page_path(@conn, :index)do img_tag("/images/backbutton.png") end %></span>
+</div>
 <% else %>
-<span><%= link "Back", to: Routes.user_path(@conn, :show, @current_user.id) %></span>
+<span ><%= link "Back", to: Routes.user_path(@conn, :show, @current_user.id) %></span>
 <% end %>
 <div class="column">
   <%= for post <- @user.posts do %>

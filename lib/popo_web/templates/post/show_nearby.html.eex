@@ -4,6 +4,11 @@
   <h1>Nearby Posts</h1>
 <% end %>
 
+<div class="back-yourpost"
+<span><%= link  to: Routes.page_path(@conn, :index)  do img_tag("/images/backbutton.png") end  %></span>
+<span style="font-size:25px;float:right"><%= link "+Post Your PoPo", to: Routes.post_path(@conn, :new, %{"type" =>"updateLocation"}) %></span>
+</div>
+<br>
 
 <%= for post <- @posts do %>
     <div class="card row-nearby">
@@ -24,5 +29,6 @@
 <% end %>
 
 
-<span><%= link "New Post", to: Routes.post_path(@conn, :new, %{"type" =>"updateLocation"}) %></span>
-<span><%= link "Back", to: Routes.page_path(@conn, :index) %></span>
+<div class="back-button back-nearby-post">
+  <span><%= link  to: Routes.page_path(@conn, :index)  do img_tag("/images/backbutton.png") end  %></span>
+</div>

@@ -43,6 +43,6 @@
       <%= label f, :location %>
       <%= select f, :location, @locations ,class: "location-button" %>
     </div>
-  <%= end %>  
+  <% end %>  
 </div>
 <% end %>
