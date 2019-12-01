@@ -96,6 +96,17 @@ defmodule PopoWeb.PopoChannel do
     {:noreply, socket}
   end
 
+  def handle_in("nearby_shout", payload, socket) do
+    IO.puts "nearby chat ========="
+    IO.inspect socket
+    IO.inspect payload
+    %{"id" => id, "to" => target, "message" => msg, "name" => name} = payload
+    {int_id, _} = Integer.parse(id)
+    {int_target, _} = Integer.parse(target)
+    broadcast socket, "nearby_shout", payload
+    {:noreply, socket}
+  end
+
   def handle_out("shout", payload, socket) do
     IO.puts ">>>>>>> handle out chat"  
     if socket.assigns[:user] == payload["to"] || socket.assigns[:user] == payload["id"] do
@@ -136,6 +147,14 @@ defmodule PopoWeb.PopoChannel do
     if socket.assigns[:user] == payload[:from_id] do
       IO.puts "response in exist"
       push socket, "friend_exists", payload
+    end
+    {:noreply, socket}
+  end
+
+  def handle_out("nearby_shout", payload, socket) do
+    IO.puts ">>>>>>> nearby out chat"  
+    if socket.assigns[:user] == payload["to"] || socket.assigns[:user] == payload["id"] do
+      push socket, "shout", payload
     end
     {:noreply, socket}
   end

@@ -4,6 +4,12 @@ defmodule PopoWeb.MessageController do
   alias Popo.Messages
   alias Popo.Messages.Message
 
+  def nearby_chat(conn, %{"id" => to}) do
+    {int_id, _} = Integer.parse(to)
+    to_name = Popo.Users.get_user_name_by_id(int_id).name
+    render(conn, "nearby_chat.html", to: to_name, to_id: to)
+  end
+
   def chat(conn, %{"id" => id}) do
     {int_id, _} = Integer.parse(id)
     # int_id = conn.assigns[:current_user].id

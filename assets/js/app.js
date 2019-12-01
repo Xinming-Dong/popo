@@ -22,15 +22,20 @@ let id = 0;
 let name = '';
 let channel;
 let target = '';
-let nearby = document.querySelectorAll(".add_friend_btn");
+// configurations
 let config = document.getElementById("config");
-console.log("******************* check config in js");
-console.log(config);
+
+// nearby
+let nearby = document.querySelectorAll(".add_friend_btn");
+
+// chat with friends
 let ul = document.getElementById('msg-list');        // list of messages.
 let msg = document.getElementById('msg');            // message input field
 let friends = document.querySelectorAll(".list-group-item");
 
-
+// chat with nearby
+let nearby_ul = document.getElementById('nearby-msg-list');
+let nearby_msg = document.getElementById('nearby_msg'); 
 
 if(config) {
   console.log(">>>>>>>>> here we have current user, join channel");
@@ -110,6 +115,14 @@ channel.on('shout', function (payload) { // listen to the 'shout' event
     let resp = payload.msg;
     window.alert(resp);
   });
+
+  channel.on('nearby_shout', function (payload) { // listen to the 'shout' event
+    let li = document.createElement("li"); // create new list item DOM element
+    let name = payload.name || 'guest';    // get name from payload or set default
+    console.log(payload);
+    li.innerHTML = "<b>" + name + "</b>: " + payload.message; // set li contents
+    nearby_ul.appendChild(li);                    // append to list
+  });
 // let channel = socket.channel('popo:lobby', {id: id}); // connect to chat "popo"
 
 
@@ -157,6 +170,23 @@ if(nearby) {
         to: add_req_target,
       });
     });
+  });
+}
+
+if(nearby_msg) {
+  nearby_msg.addEventListener('keypress', function (event) {
+    let nearby_target = document.getElementById('nearby_chat_config').getAttribute('target');
+    console.log(">>>>>>>>>>> nearby_target");
+    console.log(nearby_target);
+    if (event.keyCode == 13 && nearby_msg.value.length > 0) { // don't sent empty msg.
+      channel.push('nearby_shout', { // send the message to the server on "shout" channel
+        id: id,
+        to: nearby_target,
+        name: name,     // get value of "name" of person sending the message
+        message: nearby_msg.value,    // get message text (value) from msg input field.
+      });
+      nearby_msg.value = '';         // reset the message input field for next message.
+    }
   });
 }
 

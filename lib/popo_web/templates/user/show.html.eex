@@ -18,7 +18,7 @@
         <td><%= link( user.name, to: Routes.profile_path(@conn, :show, user)) %></td>
 
         <td>
-          <span><a class="nav-link" href="#">chat</a></span>
+          <div id="chat_btn"><%= link( "chat", to: Routes.message_path(@conn, :nearby_chat, id: user.id)) %></div>
         </td>
         <td>
           <button class="add_friend_btn" user_id="<%= user.id %>">+add</button>

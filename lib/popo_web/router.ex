@@ -31,6 +31,7 @@ defmodule PopoWeb.Router do
     get "/profiles/:id/file", ProfileController, :file
 
     get "/message/chat", MessageController, :chat
+    get "/message/nearby_chat", MessageController, :nearby_chat
   end
 
   # Other scopes may use custom stacks.
