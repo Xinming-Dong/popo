@@ -7,9 +7,10 @@ defmodule PopoWeb.PostController do
   alias Popo.GeocodeApi
 
 
-  def index(conn, params) do
-    IO.inspect params
-    user = Users.get_user_with_posts!(Map.get(params, :user_id))
+  def index(conn, %{"user_id" => user_id}) do
+    IO.inspect user_id
+    IO.puts "here"
+    user = Users.get_user_with_posts!(user_id)
     render(conn, "index.html", user: user)
   end
 
