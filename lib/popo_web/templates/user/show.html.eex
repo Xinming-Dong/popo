@@ -1,38 +1,38 @@
-<h1>Show Users</h1>
-<%= img_tag("data:image/png;base64,"<> @image) %>
-<%= if @users do %>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Name</th>
 
-      <th></th>
-    </tr>
-  </thead>
-   <tbody>
-    <%= for user <- @users do %>
-    <tr>
-      <td><%= link( user.name, to: Routes.profile_path(@conn, :show, user)) %></td>
+<div>
+  <h1>Show Users</h1>
+  
+  <%= img_tag("data:image/png;base64,"<> @image) %>
+  <%= if @users do %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
 
-      <td>
-        <span><a class="nav-link" href="#">chat</a></span>
-       </td>
-       <td>
-        <span><a class="nav-link" href="#">+add</a></span>
-       </td>
-       <td>
-	<%= link( "show posts", to: Routes.post_path(@conn, :index, user_id: user.id)) %>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-<% else %>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for user <- @users do %>
+      <tr>
+        <td><%= link( user.name, to: Routes.profile_path(@conn, :show, user)) %></td>
+
+        <td>
+          <span><a class="nav-link" href="#">chat</a></span>
+        </td>
+        <td>
+          <button class="add_friend_btn" user_id="<%= user.id %>">+add</button>
+        </td>
+        <td>
+	        <%= link( "show posts", to: Routes.post_path(@conn, :index, user_id: user.id)) %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% else %>
     <p>Please enable location.</p> 
-<% end %>
-
-
-
-
-
-<span><%= link "Back", to: Routes.page_path(@conn, :index) %></span>
+  <% end %>
+  <span><%= link "Back", to: Routes.page_path(@conn, :index) %></span>
+  
+</div>

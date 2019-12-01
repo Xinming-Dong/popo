@@ -1,8 +1,4 @@
 <div class="row">
-  <div id="chat_config"
-    user_id="<%= @id%>"
-    user_name="<%= @name%>">
-  </div>
   <div class="col-12">
     <h1>Welcome to Popo App</h1>
     <p id="room-name">Choose a friend to start chatting</p>

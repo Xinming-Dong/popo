@@ -18,100 +18,146 @@ import "phoenix_html"
 
 import socket from "./socket"
 
+let id = 0;
+let name = '';
+let channel;
+let target = '';
+let nearby = document.querySelectorAll(".add_friend_btn");
+let config = document.getElementById("config");
+console.log("******************* check config in js");
+console.log(config);
 let ul = document.getElementById('msg-list');        // list of messages.
 let msg = document.getElementById('msg');            // message input field
-let id = document.getElementById("chat_config").getAttribute("user_id");
-let name = document.getElementById("chat_config").getAttribute("user_name");
 let friends = document.querySelectorAll(".list-group-item");
-let target = '';
-console.log(id);
-console.log(name)
 
-let channel = socket.channel('popo:lobby', {id: id}); // connect to chat "popo"
 
+
+if(config) {
+  console.log(">>>>>>>>> here we have current user, join channel");
+  id = config.getAttribute("user_id");
+  name = config.getAttribute("user_name");
+  channel = socket.channel('popo:lobby', {id: id}); // connect to chat "popo"
+  channel.join();
+}
+
+
+console.log("+++++++++++++++ check join channel");
 channel.on('shout', function (payload) { // listen to the 'shout' event
-  let li = document.createElement("li"); // create new list item DOM element
-  let name = payload.name || 'guest';    // get name from payload or set default
-  console.log(payload);
-  li.innerHTML = "<b>" + name + "</b>: " + payload.message; // set li contents
-  ul.appendChild(li);                    // append to list
-});
+    let li = document.createElement("li"); // create new list item DOM element
+    let name = payload.name || 'guest';    // get name from payload or set default
+    console.log(payload);
+    li.innerHTML = "<b>" + name + "</b>: " + payload.message; // set li contents
+    ul.appendChild(li);                    // append to list
+  });
 
-channel.on('msg_history', function(payload) {
-  console.log(">>>>>>>>> msg history in js");
-  console.log(payload);
-  let to = payload.to || 'unknown'
-  document.getElementById("room-name").innerHTML = "Chat with " + to;
-  let msg_list = payload.msg_list
-  // ul.clean
-  ul.innerHTML = '';
-  // add msg
-  if (msg_list) {
-    msg_list.forEach(function(m) {
-      let li = document.createElement("li");
-      console.log(m.time);
-      li.innerHTML = "<b>" + m.from + "</b>: " + m.content;
-      ul.appendChild(li);
-    })
-  }
-});
-
-// channel.on('add_friend', function(payload) {
+  channel.on('msg_history', function(payload) {
+    console.log(">>>>>>>>> msg history in js");
+    console.log(payload);
+    let to = payload.to || 'unknown'
+    document.getElementById("room-name").innerHTML = "Chat with " + to;
+    let msg_list = payload.msg_list
+    // ul.clean
+    ul.innerHTML = '';
+    // add msg
+    if (msg_list) {
+      msg_list.forEach(function(m) {
+        let li = document.createElement("li");
+        console.log(m.time);
+        li.innerHTML = "<b>" + m.from + "</b>: " + m.content;
+        ul.appendChild(li);
+      })
+    }
+  });
   
-//   if (confirm("You have a new friend request")) {
-//     console.log("accept");
-//     channel.push("new_friends", response = {
-//       from: 1,
-//       to: 2,
-//       accept: true,
-//     });
-//   } else {
-//     console.log("decline");
-//     channel.push("new_friends", response = {
-//       from: 1,
-//       to: 2,
-//       accept: false,
-//     });
-//   }
-// });
+  channel.on('add_friend', function(payload) {
+    console.log(">>>>>>>>>>> channel on add friend");
+    console.log(payload);
+    let from_name = payload.from_name
+    if (confirm("You have a new friend request from " + from_name)) {
+      console.log("accept");
+      channel.push("new_friends", {
+        from: payload.from_id,
+        to: payload.to,
+        accept: true,
+      });
+    } else {
+      console.log("decline");
+      channel.push("new_friends", {
+        from: payload.from_id,
+        to: payload.to,
+        accept: false,
+      });
+    }
+  });
+  
+  channel.on("new_friends", function(payload) {
+    let accept = payload.accept;
+    console.log(">>>>>>>>>> js channel.on new_friends");
+    console.log(payload);
+    if (accept) {
+      console.log("js channel on accept");
+      window.alert("added");
+      // add to friend list
+    }
+    else {
+      console.log("js channel on decline");
+      window.alert("declined");
+    }
+  });
 
-// channel.on("new_friends", function(payload) {
-//   if (accept) {
-//     window.alert("added");
-//     // add to friend list
-//   }
-//   else {
-//     window.alert("declined");
-//   }
-// });
+  channel.on("friend_exists", function(payload) {
+    console.log(">>>>>>>>>> js channel.on already exists");
+    let resp = payload.msg;
+    window.alert(resp);
+  });
+// let channel = socket.channel('popo:lobby', {id: id}); // connect to chat "popo"
 
-channel.join(); // join the channel.
+
+// channel.join(); // join the channel.
 
 
 // "listen" for the [Enter] keypress event to send a message:
-msg.addEventListener('keypress', function (event) {
-  if (event.keyCode == 13 && msg.value.length > 0) { // don't sent empty msg.
-    console.log(">>>>>>> on press enter");
-    console.log(target);
-    channel.push('shout', { // send the message to the server on "shout" channel
-      id: id,
-      to: target,
-      name: name,     // get value of "name" of person sending the message
-      message: msg.value,    // get message text (value) from msg input field.
-    });
-    msg.value = '';         // reset the message input field for next message.
-  }
-});
+if(msg) {
+  msg.addEventListener('keypress', function (event) {
+    if (event.keyCode == 13 && msg.value.length > 0) { // don't sent empty msg.
+      console.log(">>>>>>> on press enter");
+      console.log(target);
+      channel.push('shout', { // send the message to the server on "shout" channel
+        id: id,
+        to: target,
+        name: name,     // get value of "name" of person sending the message
+        message: msg.value,    // get message text (value) from msg input field.
+      });
+      msg.value = '';         // reset the message input field for next message.
+    }
+  });
+}
 
-friends.forEach(function(friend) {
-  friend.addEventListener('click', function() {
-    msg.style.visibility = "visible";
-    target = friend.getAttribute("id");
-    console.log(target);
-    channel.push('msg_history', {
-      from: id,
-      to: target,
+if(friends) {
+  friends.forEach(function(friend) {
+    friend.addEventListener('click', function() {
+      msg.style.visibility = "visible";
+      target = friend.getAttribute("id");
+      console.log(target);
+      channel.push('msg_history', {
+        from: id,
+        to: target,
+      });
     });
-  })
-})
+  });
+}
+
+if(nearby) {
+  nearby.forEach(function(near) {
+    near.addEventListener('click', function() {
+      console.log(">>>>>>>>> click nearby");
+      let add_req_target = near.getAttribute("user_id");
+      channel.push('add_friend', {
+        from: id,
+        to: add_req_target,
+      });
+    });
+  });
+}
+
 

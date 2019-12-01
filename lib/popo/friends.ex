@@ -8,6 +8,12 @@ defmodule Popo.Friends do
 
   alias Popo.Friends.Friend
 
+  def check_exist(from, to) do
+    IO.puts ">>>>>> check exist"
+    query = from f in "friends", where: f.user_1 == ^from and f.user_2 == ^to, select: %{id: f.id}
+    Repo.all(query)
+  end
+
   def get_friend_list_by_user_id(id) do
     query = from f in "friends", where: f.user_1 == ^id, select: %{user_2_id: f.user_2}
     Repo.all(query)
