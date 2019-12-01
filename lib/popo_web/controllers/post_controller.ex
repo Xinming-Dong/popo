@@ -9,7 +9,7 @@ defmodule PopoWeb.PostController do
 
   def index(conn, params) do
     IO.inspect params
-    user = Users.get_user_with_posts!(conn.assigns[:current_user].id)
+    user = Users.get_user_with_posts!(Map.get(params, :user_id))
     render(conn, "index.html", user: user)
   end
 
