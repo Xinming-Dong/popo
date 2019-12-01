@@ -1,21 +1,30 @@
-<div class="row">
+  <h1>Welcome to Popo App</h1>
+
+  <div class="logo">
+    <img  src="/images/logo3.png" class="logo-popo">
+  </div>  
+
+  <div class="chat-form">
   <div id="chat_config"
     user_id="<%= @id%>"
     user_name="<%= @name%>">
   </div>
   <div class="col-12">
-    <h1>Welcome to Popo App</h1>
-    <p id="room-name">Choose a friend to start chatting</p>
+    <h1 id="room-name">Choose a friend to start chatting</h1>
     <div class="row vh-100">
-      <div class="col-md-3 list-group" id="friend_list">
+      <div class="col-md-3 list-group" id="friend_list" style="font-size:25px;">
         <%= for friend <- @friends do %>
           <li class="list-group-item" id="<%= friend.user_2_id%>"><%= friend.user_2_name %> </li>
         <% end %>
       </div>
       <div class="col-xs-12">
+        <div class="chat-table">
         <ul id='msg-list' style='list-style: none; min-height:200px; padding: 10px;'></ul>
+        </div>
+        <textarea id="msg" class="form-control" placeholder="Your Message" style="visibility:hidden;height:200px;font-size:25px;"></textarea>
       </div>
-       <input type="text" id="msg" class="form-control" placeholder="Your Message" style="visibility:hidden;">
+      
     </div>
   </div>
-</div>
+  </div>
+

@@ -2,6 +2,11 @@
 
 <ul>
 
+  <h1>
+    <strong>Author:</strong>
+    <%= link(@post.user.name,
+              to: Routes.profile_path(@conn, :show, @post.user)) %>
+  </h1>
 
   <div class="card row-4">
       <%= if @post.uuid do %>
@@ -19,12 +24,9 @@
       </div>
   </div>
 
-  <li>
-    <strong>Author:</strong>
-    <%= link(@post.user.name,
-              to: Routes.profile_path(@conn, :show, @post.user)) %>
-  </li>
+ 
 
 </ul>
-
-<span><%= link "Back", to: Routes.post_path(@conn, :show, @current_user, type: "nearby", location: nil) %></span>
+<div class="back-button show-post">
+  <span><%= link to: Routes.post_path(@conn, :show, @current_user, type: "nearby", location: nil) do img_tag("/images/backbutton.png") end  %></span>
+</div>
