@@ -12,13 +12,16 @@
         <%= if @post.location do %>
           <p class="card-text"><%= @post.location %></p>
         <% end %>
-        <p class="card-text"><%= @post.updated_at%></p>
+        <p class="card-text"></p>
         <%= if @current_user.id == @post.user.id do %>
           <span class="card-link"><%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %></span>
           <span class="card-link"><%= link "Delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"] %></span>
         <% end %>
       </div>
   </div>
+
+  <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/localtime.js") %>"></script>
+  
 
   <li>
     <strong>Author:</strong>
