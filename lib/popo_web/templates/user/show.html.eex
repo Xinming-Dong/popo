@@ -1,18 +1,18 @@
-
-<div>
-  <h1>Show Users</h1>
-  
+<h1>Show Users</h1>
+<div class="map-image">
   <%= img_tag("data:image/png;base64,"<> @image) %>
+</div>
+<div class="nearby-page">
   <%= if @users do %>
-  <table class="table table-striped">
+  <table class="table table-striped" >
     <thead>
       <tr>
-        <th>Name</th>
+        <th id="user-name">Name</th>
 
         <th></th>
       </tr>
     </thead>
-    <tbody>
+     <tbody>
       <%= for user <- @users do %>
       <tr>
         <td><%= link( user.name, to: Routes.profile_path(@conn, :show, user)) %></td>
@@ -33,6 +33,7 @@
   <% else %>
     <p>Please enable location.</p> 
   <% end %>
-  <span><%= link "Back", to: Routes.page_path(@conn, :index) %></span>
-  
+  <div style="width:40px;">
+  <span><%= link to: Routes.page_path(@conn, :index) do img_tag("/images/backbutton.png") end %></span>
+  </div>
 </div>

@@ -12,7 +12,7 @@
     <div class="container">
       <nav class="navbar navbar-expand-sm navbar-light bg-white">
         <div class="col-4">
-          <a class="navbar-brand" href="#">POPO</a>
+          <a class="navbar-brand" href="http://localhost:4000/">POPO</a>
         </div>
         <div class="col-4">
           <ul class="navbar-nav mr-auto">
@@ -32,14 +32,15 @@
             <% end %>
           </ul>
         </div>
-        <li>
+              <li>
 	        <%= if @current_user do %>
 	        <%= link("Nearby", to: Routes.user_path(@conn, :edit, @current_user.id, type: "user")) %>
 	        <% end %>
 	      </li>
+               
 	      <div class="col-4 text-light">
           <%= if @current_user do %>
-	          User: <%= link(@current_user.name,
+	  	          <%= link(@current_user.name,
               to: Routes.profile_path(@conn, :show, @current_user)) %>
             (<%= link("Logout", to: Routes.session_path(@conn, :delete),
               method: :delete) %>)
