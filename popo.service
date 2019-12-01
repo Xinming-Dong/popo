@@ -1,0 +1,16 @@
+[Unit]
+Description=Popo chatting 
+
+[Service]
+Type=simple
+User=popo
+Group=popo
+Restart=on-failure
+Environment=MIX_ENV=prod "PORT=4750"
+Environment=LANG=en_US.UTF-8
+
+WorkingDirectory=/home/popo/popo
+ExecStart=/bin/bash /home/popo/popo/start.sh
+
+[Install]
+WantedBy=multi-user.target
