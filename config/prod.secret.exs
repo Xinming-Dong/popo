@@ -17,3 +17,5 @@ config :popo, Popo.Repo,
   password: "postgres",
   database: "popo_prod",
   pool_size: 15
+
+config :popo, PopoWeb.Endpoint, server: true
