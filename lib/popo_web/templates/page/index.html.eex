@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-12">
-    <h1>Welcome to Popo App</h1>
-    
+    <h1>Welcome to Popo App</h1> 
   </div>
+  
+  <img src="/images/background.png" >
 </div>
