@@ -44,4 +44,7 @@
 <span><%= link "Back", to: Routes.page_path(@conn, :index) %></span>
 <% else %>
 <span><%= link "Back", to: Routes.user_path(@conn, :show, @current_user.id) %></span>
+<span><a href="#">Add</a></span>
+<span><a href="#">Chat</a></span>
+
 <% end %>

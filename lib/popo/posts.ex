@@ -45,6 +45,7 @@ defmodule Popo.Posts do
     query = from u in Post,
           where: (u.longitude - ^user.longitude)*(u.longitude - ^user.longitude) +
  (u.latitude - ^user.latitude) * (u.latitude - ^user.latitude) < 0.000072 and u.user_id != ^user.id,
+         order_by: [desc: u.inserted_at],
     preload: [:user]
     Repo.all(query)
 
