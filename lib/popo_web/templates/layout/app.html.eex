@@ -14,7 +14,7 @@
         <div class="col-4">
           <a class="navbar-brand" href="http://localhost:4000/">POPO</a>
         </div>
-        <div class="col-4">
+        <div class="col-5">
           <ul class="navbar-nav mr-auto">
             <%= if @current_user do %>
             
@@ -22,21 +22,28 @@
               <%#  ------------ configurations -------------  %>
               <div id="config" user_id="<%= @current_user.id%>" user_name="<%= @current_user.name%>" ></div>
               <%#  ------------ end -------------  %>
-
-
+            <ul class="breadcrumb" >
+              <li>
               <%= link( "Your Posts", to: Routes.post_path(@conn, :index, user_id: @current_user.id)) %>
+	      </li>
+	      <li>
+              <%= link( "Chat", to: Routes.message_path(@conn, :chat, id: @current_user.id)) %>
+	      </li>
 	      <%= if @current_user.latitude do %>
-              |<%= link( "Nearby Posts", to: Routes.post_path(@conn, :show, @current_user, type: "nearby", location: nil)) %>
-              |<%= link( "chat", to: Routes.message_path(@conn, :chat, id: @current_user.id)) %>
+	      <li>
+              <%= link( "Nearby Posts", to: Routes.post_path(@conn, :show, @current_user, type: "nearby", location: nil)) %>
+	      </li>
 	      <% end %>
-            <% end %>
+	      <li>
+	      <%= link("Nearby", to: Routes.user_path(@conn, :edit, @current_user.id, type: "user")) %>
+	      </li>
+	    </ul>
+            <% end %> 
           </ul>
         </div>
-              <li>
-	        <%= if @current_user do %>
-	        <%= link("Nearby", to: Routes.user_path(@conn, :edit, @current_user.id, type: "user")) %>
-	        <% end %>
-	      </li>
+              
+	        
+	      
                
 	      <div class="col-4 text-light">
           <%= if @current_user do %>

@@ -243,6 +243,9 @@ img{
 }
 
 .row-nearby{
+  width:700px;
+  position:relative;
+  left:18%;
   margin:20px;
 
 }
@@ -270,4 +273,17 @@ img{
 
 }
 
+.breadcrumb {
+    list-style: none;
+    padding: 0;
+    background:white;
+}
 
+.breadcrumb > li {
+    display: inline;
+}
+
+.breadcrumb > li:not(:last-child)::after {
+    content: "›";
+    margin: 0 .25em;
+}
