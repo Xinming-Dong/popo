@@ -25,9 +25,10 @@
 
 
               <%= link( "Your Posts", to: Routes.post_path(@conn, :index, user_id: @current_user.id)) %>
+              |<%= link( "chat", to: Routes.message_path(@conn, :chat, id: @current_user.id)) %>
 	      <%= if @current_user.latitude do %>
               |<%= link( "Nearby Posts", to: Routes.post_path(@conn, :show, @current_user, type: "nearby", location: nil)) %>
-              |<%= link( "chat", to: Routes.message_path(@conn, :chat, id: @current_user.id)) %>
+              
 	      <% end %>
             <% end %>
           </ul>
