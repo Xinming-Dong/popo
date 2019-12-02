@@ -7120,6 +7120,12 @@ img {
   position: relative;
   left: 50%; }
 
+.back-nearby-chat {
+  width: 100px;
+  position: relative;
+  top: 130px;
+  left: 50%; }
+
 .logo-popo {
   width: 200px; }
 
