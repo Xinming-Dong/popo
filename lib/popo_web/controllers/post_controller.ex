@@ -82,7 +82,7 @@ defmodule PopoWeb.PostController do
 
     conn
     |> put_flash(:info, "Post deleted successfully.")
-    |> redirect(to: Routes.post_path(conn, :index))
+    |> redirect(to: Routes.post_path(conn, :index, user_id: conn.assigns[:current_user].id))
   end
 
   def file(conn, %{"id" => id}) do

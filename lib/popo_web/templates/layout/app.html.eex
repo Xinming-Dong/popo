@@ -12,7 +12,7 @@
     <div class="container">
       <nav class="navbar navbar-expand-sm navbar-light bg-white">
         <div class="col-4">
-          <a class="navbar-brand" href="http://localhost:4000/">POPO</a>
+          <a class="navbar-brand" href="http://popo.weihanliu.space/">POPO</a>
         </div>
         <div class="col-4">
           <ul class="navbar-nav mr-auto">
