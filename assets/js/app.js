@@ -36,6 +36,7 @@ let friends = document.querySelectorAll(".list-group-item");
 // chat with nearby
 let nearby_ul = document.getElementById('nearby-msg-list');
 let nearby_msg = document.getElementById('nearby_msg'); 
+let nearby_chat_btn = document.querySelectorAll(".nearby_chat_btn");
 
 if(config) {
   console.log(">>>>>>>>> here we have current user, join channel");
@@ -123,6 +124,12 @@ channel.on('shout', function (payload) { // listen to the 'shout' event
     li.innerHTML = "<b>" + name + "</b>: " + payload.message; // set li contents
     nearby_ul.appendChild(li);                    // append to list
   });
+
+  channel.on('nearby_shout_first', function(payload) {
+    if(payload.first) {
+      window.alert("You've got a message from " + payload.name + ": " + payload.message + "\n" + "Click chat to start chatting.");
+    }
+  });
 // let channel = socket.channel('popo:lobby', {id: id}); // connect to chat "popo"
 
 
@@ -163,7 +170,7 @@ if(friends) {
 if(nearby) {
   nearby.forEach(function(near) {
     near.addEventListener('click', function() {
-      console.log(">>>>>>>>> click nearby");
+      
       let add_req_target = near.getAttribute("user_id");
       channel.push('add_friend', {
         from: id,
@@ -179,15 +186,27 @@ if(nearby_msg) {
     console.log(">>>>>>>>>>> nearby_target");
     console.log(nearby_target);
     if (event.keyCode == 13 && nearby_msg.value.length > 0) { // don't sent empty msg.
+      console.log(">>>>>>>>>>>>> nearby_msg");
+      console.log(nearby_ul.hasChildNodes());
       channel.push('nearby_shout', { // send the message to the server on "shout" channel
         id: id,
         to: nearby_target,
         name: name,     // get value of "name" of person sending the message
         message: nearby_msg.value,    // get message text (value) from msg input field.
+        first: !nearby_ul.hasChildNodes()
       });
       nearby_msg.value = '';         // reset the message input field for next message.
     }
   });
 }
 
-
+if(nearby_chat_btn) {
+  console.log(">>>>>>>>> outer click nearby");
+  console.log(nearby_chat_btn);
+  nearby_chat_btn.forEach(function(near) {
+    near.addEventListener('click', function() {
+      console.log(">>>>>>>>> click nearby");
+      console.log(near.getAttribute("to"));
+    })
+  });
+}
