@@ -16,14 +16,14 @@ alias Popo.Repo
 
 # alias Popo.F
 
-Repo.insert!(%User{email: "aa@aa", name: "aa", password: "123456789012"})
-Repo.insert!(%User{email: "bb@bb", name: "bb", password: "123456789012"})
-Repo.insert!(%User{email: "cc@cc", name: "cc", password: "123456789012"})
+# Repo.insert!(%User{email: "aa@aa", name: "aa", password: "123456789012"})
+# Repo.insert!(%User{email: "bb@bb", name: "bb", password: "123456789012"})
+# Repo.insert!(%User{email: "cc@cc", name: "cc", password: "123456789012"})
 
-Repo.insert!(%Friend{user_1: 1, user_2: 2})
-Repo.insert!(%Friend{user_1: 2, user_2: 1})
+# Repo.insert!(%Friend{user_1: 1, user_2: 2})
+# Repo.insert!(%Friend{user_1: 2, user_2: 1})
 
-Repo.insert!(%Friend{user_1: 1, user_2: 3})
-Repo.insert!(%Friend{user_1: 3, user_2: 1})
+# Repo.insert!(%Friend{user_1: 1, user_2: 3})
+# Repo.insert!(%Friend{user_1: 3, user_2: 1})
 
 

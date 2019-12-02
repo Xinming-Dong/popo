@@ -20,6 +20,13 @@ defmodule Popo.Users do
   def list_users do
     Repo.all(User)
   end
+    def authenticate(email, pass) do
+    user = Repo.get_by(User, email: email)
+    case Argon2.check_pass(user, pass) do
+      {:ok, user} -> user
+      _ -> nil
+    end
+  end
 
   def get_nearby(user) do
     if user.longitude == nil || user.latitude == nil do

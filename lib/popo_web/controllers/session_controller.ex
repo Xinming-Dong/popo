@@ -5,13 +5,14 @@ defmodule PopoWeb.SessionController do
     render(conn, "new.html")
   end
 
-  def create(conn, %{"email" => email}) do
-    user = Popo.Users.get_user_by_email(email)
+  def create(conn, %{"email" => email, "password" => password}) do
+    user = Popo.Users.authenticate(email, password)
     IO.puts ">>>>>>>>>>> session controllser create"
     IO.inspect user
-    id = user.id
-    name = user.name
+
     if user do
+      id = user.id
+      name = user.name
       conn
       |> put_session(:user_id, user.id)
       |> put_flash(:info, "Welcome back #{user.email}")
@@ -25,7 +26,7 @@ defmodule PopoWeb.SessionController do
 
   def delete(conn, _params) do
     user = Popo.Users.get_user(get_session(conn, :user_id))
-    Popo.Users.update_user(user, %{latitude: nil, longitude: nil}) 
+    Popo.Users.update_user(user, %{latitude: nil, longitude: nil})
     conn
     |> delete_session(:user_id)
     |> put_flash(:info, "Logged out.")
