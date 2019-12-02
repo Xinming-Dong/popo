@@ -5,10 +5,7 @@
   </div>  
 
   <div class="chat-form">
-  <div id="chat_config"
-    user_id="<%= @id%>"
-    user_name="<%= @name%>">
-  </div>
+
   <div class="col-12">
     <h1 id="room-name">Choose a friend to start chatting</h1>
     <div class="row vh-100">
