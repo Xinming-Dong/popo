@@ -18,3 +18,7 @@
     </div>
   </div>
 </div>
+
+<div class="back-nearby-chat">
+  <span><%= link to: Routes.user_path(@conn, :edit, @current_user.id, type: "user") do img_tag("/images/backbutton.png") end  %></span>
+</div>
