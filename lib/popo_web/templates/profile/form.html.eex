@@ -4,6 +4,12 @@
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
+<div class="profile-form">
+<div class="form-group">
+  <%= label f, :photo, "Choose Your Profile Photo" %>
+  <%= file_input f, :photo, class: "form-control btn btn-file" %>
+  <%= error_tag f, :photo %>
+</div>
 <div class="form-group">
   <%= label f, :dob %>
   <%= date_select f, :dob, year: [options: 1919..2019] %>
@@ -19,16 +25,13 @@
  </div>
 <div class="form-group">
   <%= label f, :intro %>
+  <br>
   <%= textarea f, :intro %>
   <%= error_tag f, :intro %>
  </div>
-<div class="form-group">
-  <%= label f, :photo %>
-  <%= file_input f, :photo, class: "form-control btn btn-file" %>
-  <%= error_tag f, :photo %>
-</div>
 
   <div>
     <%= submit "Save", class: "btn btn-primary" %>
   </div>
 <% end %>
+</div>

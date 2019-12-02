@@ -43,6 +43,6 @@
       <%= label f, :location %>
       <%= select f, :location, @locations, prompt: "Choose location" %>
     </div>
-  <%= end %>  
+  <% end %>  
 </div>
 <% end %>

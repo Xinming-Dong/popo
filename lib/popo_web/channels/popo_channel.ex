@@ -47,7 +47,7 @@ defmodule PopoWeb.PopoChannel do
     {int_from, _} = Integer.parse(from)
     {int_to, _} = Integer.parse(to)
     msg_history = Messages.msg_history(int_from, int_to) # Messages.get_msg_history(from, to)
-    msg_history = Enum.map(msg_history, fn m -> 
+    msg_history = Enum.map(msg_history, fn m ->
       %{from: Popo.Users.get_user_name_by_id(m.from).name, time: NaiveDateTime.to_string(m.time), content: m.content}
     end)
     reply = %{to: Popo.Users.get_user_name_by_id(int_to).name, msg_list: msg_history}
@@ -62,7 +62,7 @@ defmodule PopoWeb.PopoChannel do
     %{"from" => from, "to" => to} = payload
     {int_from, _} = Integer.parse(from)
     {int_to, _} = Integer.parse(to)
-    
+
 
     # check if they are friend
     exist = Popo.Friends.check_exist(int_from, int_to)
@@ -74,8 +74,8 @@ defmodule PopoWeb.PopoChannel do
       broadcast socket, "add_friend", request
     else
       request = %{from_id: from, msg: "You are already friends"}
-      broadcast socket, "friend_exists", request    
-    end 
+      broadcast socket, "friend_exists", request
+    end
     {:noreply, socket}
   end
 
@@ -90,7 +90,7 @@ defmodule PopoWeb.PopoChannel do
       IO.puts ">>>>>>>>>>>>>>> insert friends here"
       Friends.create_friend(%{user_1: int_from, user_2: int_to})
       Friends.create_friend(%{user_1: int_to, user_2: int_from})
-      IO.puts "accepted"     
+      IO.puts "accepted"
     end
     broadcast socket, "new_friends", payload
     {:noreply, socket}
@@ -108,7 +108,7 @@ defmodule PopoWeb.PopoChannel do
   end
 
   def handle_out("shout", payload, socket) do
-    IO.puts ">>>>>>> handle out chat"  
+    IO.puts ">>>>>>> handle out chat"
     if socket.assigns[:user] == payload["to"] || socket.assigns[:user] == payload["id"] do
       push socket, "shout", payload
     end

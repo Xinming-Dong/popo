@@ -2,6 +2,11 @@
 
 <ul>
 
+  <h1>
+    <strong>Author:</strong>
+    <%= link(@post.user.name,
+              to: Routes.profile_path(@conn, :show, @post.user)) %>
+  </h1>
 
   <div class="card row-4">
       <%= if @post.uuid do %>
@@ -12,25 +17,16 @@
         <%= if @post.location do %>
           <p class="card-text"><%= @post.location %></p>
         <% end %>
-        <p class="card-text"></p>
-        <%= if @current_user.id == @post.user.id do %>
-          <span class="card-link"><%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %></span>
+        <p class="card-text"><%= @post.updated_at%></p>
+        <%= if @current_user.id == @post.user.id do %> 
           <span class="card-link"><%= link "Delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"] %></span>
         <% end %>
       </div>
   </div>
 
-  <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/localtime.js") %>"></script>
-  
-
-  <li>
-    <strong>Author:</strong>
-    <%= link(@post.user.name,
-              to: Routes.profile_path(@conn, :show, @post.user)) %>
-  </li>
+ 
 
 </ul>
-<%= if @post.location do %>
-  <span><%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %></span>
-<% end %>
-<span><%= link "Back", to: Routes.post_path(@conn, :show, @current_user, type: "nearby", location: nil) %></span>
+<div class="back-button show-post">
+  <span><%= link to: Routes.post_path(@conn, :show, @current_user, type: "nearby", location: nil) do img_tag("/images/backbutton.png") end  %></span>
+</div>
