@@ -7040,6 +7040,25 @@ body {
   overflow: auto;
   font-size: 25px; }
 
+.friend-list {
+  width: 260px;
+  height: 640px;
+  background-color: rgba(240, 255, 255, 0);
+  overflow: auto;
+  font-size: 25px; }
+
+.col-xs-12-nearby {
+  width: 1090px;
+  height: 840px;
+  background-color: rgba(240, 255, 255, 0.2); }
+
+.chat-table-nearby {
+  width: 1090px;
+  height: 640px;
+  background-color: rgba(240, 255, 255, 0);
+  overflow: auto;
+  font-size: 25px; }
+
 .chat-form {
   width: 1110px;
   height: 900px;

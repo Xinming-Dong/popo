@@ -10,9 +10,11 @@
     <h1 id="room-name">Choose a friend to start chatting</h1>
     <div class="row vh-100">
       <div class="col-md-3 list-group" id="friend_list" style="font-size:25px;">
+        <div class="friend-list">
         <%= for friend <- @friends do %>
           <li class="list-group-item" id="<%= friend.user_2_id%>"><%= friend.user_2_name %> </li>
         <% end %>
+        </div>
       </div>
       <div class="col-xs-12">
         <div class="chat-table">

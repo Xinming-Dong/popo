@@ -1,11 +1,19 @@
-<div class="row">
+<h1>Small Talk</h1>
+<div class="logo">
+    <img  src="/images/logo3.png" class="logo-popo">
+</div> 
+
+<div class="chat-form">
   <div class="col-12">
     <div id="nearby_chat_config" target="<%= @to_id %>"></div>
-    <p id="room-name">Chat with <%= @to %></p>
+    <h1 id="room-name style="font-size:25px;">Chat with <%= @to %></h1>
     
-      <div class="col-xs-12">
-        <ul id='nearby-msg-list' style='list-style: none; min-height:200px; padding: 10px;'></ul>
-        <input type="text" id="nearby_msg" class="form-control" placeholder="Your Message">
+      <div class="col-xs-12-nearby" >
+        <div class="chat-table-nearby">
+          <ul id='nearby-msg-list' style='list-style: none; min-height:200px; padding: 10px;'></ul>
+        </div>
+        <textarea id="nearby_msg" class="form-control" placeholder="Your Message" style="height:200px;font-size:25px;"></textarea>
+        
       </div>
     </div>
   </div>
