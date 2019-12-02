@@ -36,7 +36,6 @@ let friends = document.querySelectorAll(".list-group-item");
 // chat with nearby
 let nearby_ul = document.getElementById('nearby-msg-list');
 let nearby_msg = document.getElementById('nearby_msg'); 
-let nearby_chat_btn = document.querySelectorAll(".nearby_chat_btn");
 
 if(config) {
   console.log(">>>>>>>>> here we have current user, join channel");
@@ -197,16 +196,5 @@ if(nearby_msg) {
       });
       nearby_msg.value = '';         // reset the message input field for next message.
     }
-  });
-}
-
-if(nearby_chat_btn) {
-  console.log(">>>>>>>>> outer click nearby");
-  console.log(nearby_chat_btn);
-  nearby_chat_btn.forEach(function(near) {
-    near.addEventListener('click', function() {
-      console.log(">>>>>>>>> click nearby");
-      console.log(near.getAttribute("to"));
-    })
   });
 }
