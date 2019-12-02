@@ -9,7 +9,7 @@
 <div class="post-form"> 
   <div class="post-button">
     <span class="post-cancel" style="display:inline-block;">
-      <%= link("Cancel", to: Routes.page_path(@conn, :index)) %>
+      <%= link("Cancel", to: Routes.post_path(@conn, :index, user_id: @current_user.id)) %>
     </span>
     <span class="post-post">
     <%= submit "Post", class: "btn btn-primary" %>
