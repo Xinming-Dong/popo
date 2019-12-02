@@ -43,14 +43,14 @@ Google MAP API, Google Geocode API and Google MAP Places API.
 
 ## 2.1 Required features:
 
-2.1.1 Password and authentication
+### 2.1.1 Password and authentication
 
 
 User accounts are stored in the Postgres database with name, email and
 hashed password for the purpose of local authentication. Passwords are
 hashed using Argon2 to provide more security. 
 
-2.1.2 Postgres database design
+### 2.1.2 Postgres database design
 
 Items stored in the postgres database include:
 
@@ -64,7 +64,7 @@ Items stored in the postgres database include:
 *   Post: text description, picture, location coordinates, location
     name, all fields are optional. 
 
-2.1.3 Server side External API calls
+### 2.1.3 Server side External API calls
 
 
 In order to show current user and nearby users’ locations on a map,
@@ -87,9 +87,9 @@ reasonable number of locations to choose from, no matter if they are
 at dense urban areas or sparse rural regions. 
     	
 
-2.2 Additional Features:
+## 2.2 Additional Features:
 
-2.2.1 Using Phoenix Channels to implement real-time chat
+### 2.2.1 Using Phoenix Channels to implement real-time chat
 
 
 Popo allows real-time chatting and add friends, which are accomplished
@@ -101,7 +101,7 @@ message boxes.
 
 	
 
-2.2.2 Do something interesting with the HTML5 geolocation API
+### 2.2.2 Do something interesting with the HTML5 geolocation API
 
 
 As a location based application, Popo use the HTML5 Geolocation API to
@@ -112,7 +112,7 @@ updated when the user start a search of nearby person, or when they
 start to create a new post.
 
 
-2.2.3 Using HTTPosion and Poison Elixir Library
+### 2.2.3 Using HTTPosion and Poison Elixir Library
 
 
 For the purpose of access the external API from the server side, we
@@ -120,9 +120,9 @@ utilized the HTTPoison library to send HTTP request and get responses.
 Moreover, Poison library is used to decode the JSON responses received
 from the external API. 
 
-2.3 Beyond Project Requirements
+## 2.3 Beyond Project Requirements
 
-2.3.1 Migrating from Http to Https
+### 2.3.1 Migrating from Http to Https
 
 
 During the process of testing the application, we realize that the
@@ -138,7 +138,7 @@ certificate service) in our server and add the certificate to our
 application’s domain. 
 
 
-2.3.2 Showing Posts in local time
+### 2.3.2 Showing Posts in local time
 
 
 When posts are created and added to the database, the created time are
@@ -150,7 +150,7 @@ user’s local time.
 
 # 3 Complex Parts and Challenges
 
-3.1 Real Time chatting with Strangers
+## 3.1 Real Time chatting with Strangers
 
 
 As for channel, we choose to put all users in the same channel, and
@@ -168,7 +168,7 @@ send a flag which tells whether this is the first chat message from
 JavaScript as part of payload to channel functions. Then the channel
 function will push different message back to clients.
 
-3.2 Adding Friends
+## 3.2 Adding Friends
 
 
 When users make requests to add friends with strangers, this
@@ -205,7 +205,7 @@ attributes, and simply broadcast the message, then the user who made
 the application intercept the message and show messages accordingly in
 the browser.
 
-3.3 Obtaining Nearby Places when Creating Posts
+## 3.3 Obtaining Nearby Places when Creating Posts
 
 
 One of the features we want to provide is having a list of names of
@@ -245,7 +245,7 @@ redirect after form is auto submitted, so from the user’s view, this
 page does not exist. User will experience a small delay before they
 reach the create post page. 
 
-3.4  Render Google Map API response as image
+## 3.4  Render Google Map API response as image
 
 
 After getting the user's current location by HTML5 Geolocation, all
@@ -263,7 +263,7 @@ nearby users’ locations. To render it in html page, the binary string
 of the image need to be encoded into base64 by Base.encode64, and
 embedded into data URI “data:image/png;base64,...”
 
-3.5 UI/UX Design
+## 3.5 UI/UX Design
 
 
 We should consider how to design a simple but effective UI/UX
