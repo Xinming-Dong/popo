@@ -306,7 +306,7 @@ if they wanted to use it.
 
 *   For each team member, what work did that person do on the project?
 
-    Xinming Dong: 
+    Xinming Dong: Complete all chat related function. Write report. Add friends. 
 
 
     Weihan Liu: Complete post related functionalities, participated in
