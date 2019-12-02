@@ -4,7 +4,7 @@ defmodule PopoWeb.PopoChannel do
   alias Popo.Messages
   alias Popo.Friends
 
-  intercept ["shout", "add_friend", "new_friends", "friend_exists"]
+  intercept ["shout", "add_friend", "new_friends", "friend_exists", "nearby_shout"]
 
   def join("popo:lobby", payload, socket) do
     if authorized?(payload) do
@@ -100,7 +100,7 @@ defmodule PopoWeb.PopoChannel do
     IO.puts "nearby chat ========="
     IO.inspect socket
     IO.inspect payload
-    %{"id" => id, "to" => target, "message" => msg, "name" => name} = payload
+    %{"id" => id, "to" => target, "message" => msg, "name" => name, "first" => first} = payload
     {int_id, _} = Integer.parse(id)
     {int_target, _} = Integer.parse(target)
     broadcast socket, "nearby_shout", payload
@@ -152,9 +152,13 @@ defmodule PopoWeb.PopoChannel do
   end
 
   def handle_out("nearby_shout", payload, socket) do
-    IO.puts ">>>>>>> nearby out chat"
-    if socket.assigns[:user] == payload["to"] || socket.assigns[:user] == payload["id"] do
-      push socket, "shout", payload
+    IO.puts ">>>>>>> nearby out chat"  
+    %{"id" => id, "to" => target, "message" => msg, "name" => name, "first" => first} = payload
+    if  socket.assigns[:user] == payload["id"] do
+      push socket, "nearby_shout", payload
+    end
+    if socket.assigns[:user] == payload["to"] do
+      push socket, "nearby_shout_first", payload
     end
     {:noreply, socket}
   end
