@@ -154,12 +154,18 @@ defmodule PopoWeb.PopoChannel do
   def handle_out("nearby_shout", payload, socket) do
     IO.puts ">>>>>>> nearby out chat"  
     %{"id" => id, "to" => target, "message" => msg, "name" => name, "first" => first} = payload
-    if  socket.assigns[:user] == payload["id"] do
+    if first == true do
+      IO.puts ">>>> this is the first"
+      if socket.assigns[:user] == payload["to"] do
+        push socket, "nearby_shout_first", payload
+      end
+    end
+    IO.puts ">>>> generally shout"
+    if  socket.assigns[:user] == payload["id"] || socket.assigns[:user] == payload["to"] do
       push socket, "nearby_shout", payload
     end
-    if socket.assigns[:user] == payload["to"] do
-      push socket, "nearby_shout_first", payload
-    end
+    
+    
     {:noreply, socket}
   end
 

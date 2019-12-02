@@ -117,6 +117,7 @@ channel.on('shout', function (payload) { // listen to the 'shout' event
   });
 
   channel.on('nearby_shout', function (payload) { // listen to the 'shout' event
+    console.log(">>>>>>>>>> nearby shout");
     let li = document.createElement("li"); // create new list item DOM element
     let name = payload.name || 'guest';    // get name from payload or set default
     console.log(payload);
@@ -126,6 +127,7 @@ channel.on('shout', function (payload) { // listen to the 'shout' event
 
   channel.on('nearby_shout_first', function(payload) {
     if(payload.first) {
+      console.log(">>>>>>>>>> nearby first");
       window.alert("You've got a message from " + payload.name + ": " + payload.message + "\n" + "Click chat to start chatting.");
     }
   });
