@@ -39,9 +39,9 @@
 
 
   <%= if @locations do %>
-    <div class="post-location">
+    <div class="location-button" >
       <%= label f, :location %>
-      <%= select f, :location, @locations, prompt: "Choose location" %>
+      <%= select f, :location, @locations, prompt: "Choose location" ,class: "location-button" %>
     </div>
   <% end %>  
 </div>
