@@ -5,7 +5,7 @@ defmodule Popo.Repo.Migrations.CreateUsers do
     create table(:users) do
       add :email, :string
       add :name, :string
-      add :password, :string
+      add :password_hash, :string, default: nil, null: false
       add :latitude, :float, default: nil, null: true
       add :longitude, :float, default: nil, null: true
 
