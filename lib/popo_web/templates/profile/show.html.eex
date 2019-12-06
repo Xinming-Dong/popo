@@ -39,12 +39,11 @@
 
 
 <%= if (@current_user.id == @profile.user.id) do %>
-<span> <%= link "Edit", to: Routes.profile_path(@conn, :edit, @profile) %></span>
-<span><%= link "Back", to: Routes.page_path(@conn, :index) %></span>
+<span> <%= link "Edit", to: Routes.profile_path(@conn, :edit, @profile), class: "btn btn-primary" %></span>
+<span><%= link "Back", to: Routes.page_path(@conn, :index), class: "btn btn-primary" %></span>
 <% else %>
-<span><%= link "Back", to: Routes.user_path(@conn, :show, @current_user.id) %></span>
 <span><button class="add_friend_btn" user_id="<%= @profile.user.id %>">+add</button></span>
 <span><div id="chat_btn"><%= link( "All Posts", to: Routes.post_path(@conn, :index, user_id: @profile.user.id)) %></div></span>
-
+<span><%= link "Back", to: Routes.user_path(@conn, :show, @current_user.id) %></span>
 <% end %>
 </div>

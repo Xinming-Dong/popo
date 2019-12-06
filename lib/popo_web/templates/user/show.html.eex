@@ -15,16 +15,18 @@
      <tbody>
       <%= for user <- @users do %>
       <tr>
-        <td><%= link( user.name, to: Routes.profile_path(@conn, :show, user)) %></td>
+        <td><%= link( user.name, to: Routes.profile_path(@conn, :show, user),class: "btn btn-primary name-btn" ) %></td>
 
         <td>
-          <div class="nearby_chat_btn" id="<%= user.id %>" ><%= link( "chat", to: Routes.message_path(@conn, :nearby_chat, id: user.id)) %></div>
+          <div style="width:45px;">
+          <div class="nearby_chat_btn" id="<%= user.id %>" ><%= link to: Routes.message_path(@conn, :nearby_chat, id: user.id) do img_tag("/images/chatbutton.png") end  %></div>
+          </div>
         </td>
         <td>
-          <button class="add_friend_btn" user_id="<%= user.id %>">+add</button>
+          <button class="add_friend_btn btn btn-primary" user_id="<%= user.id %>">+add</button>
         </td>
         <td>
-	        <%= link( "show posts", to: Routes.post_path(@conn, :index, user_id: user.id)) %>
+	        <%= link( "show posts", to: Routes.post_path(@conn, :index, user_id: user.id), class: "btn btn-primary") %>
         </td>
       </tr>
       <% end %>

@@ -47,13 +47,14 @@
                
 	      <div class="col-4 text-light">
           <%= if @current_user do %>
+      
 	  	          <%= link(@current_user.name,
               to: Routes.profile_path(@conn, :show, @current_user)) %>
             (<%= link("Logout", to: Routes.session_path(@conn, :delete),
-              method: :delete) %>)
+              method: :delete, class: "btn btn-primary") %>)
           <% else %>
-            <%= link("Login", to: Routes.session_path(@conn, :new)) %>|
-	          <%= link("Register", to: Routes.user_path(@conn, :new)) %>
+            <%= link("Login", to: Routes.session_path(@conn, :new),class: "btn btn-primary") %>|
+	          <%= link("Register", to: Routes.user_path(@conn, :new),class: "btn btn-primary") %>
           <% end %>
         </div>
       </nav>
